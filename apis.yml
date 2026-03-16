@@ -1,0 +1,51 @@
+aid: volcano
+name: Volcano
+description: >-
+  Volcano is a CNCF incubating batch processing and high-performance
+  computing (HPC) scheduler for Kubernetes. It provides advanced scheduling
+  capabilities including gang scheduling, fair-share scheduling, queue
+  management, and job lifecycle management for batch workloads such as
+  machine learning training, big data processing, and scientific computing.
+url: https://volcano.sh
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+- Batch Processing
+- HPC
+- Scheduling
+- Kubernetes
+- Cloud Native
+- Incubating
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+type: Index
+apis:
+- aid: volcano:volcano-api
+  name: Volcano Batch Scheduling API
+  description: >-
+    Volcano extends Kubernetes with CRDs for batch workload management.
+    The Job resource defines batch workloads with multiple task types and
+    lifecycle policies. Queue resources manage job scheduling with
+    weight-based fair sharing and resource quotas. Volcano supports
+    gang scheduling ensuring all pods in a group are scheduled together,
+    and integrates with frameworks like TensorFlow, PyTorch, Spark, and MPI.
+  humanURL: https://volcano.sh/en/docs/
+  properties:
+  - type: Documentation
+    url: https://volcano.sh/en/docs/
+  tags:
+  - Batch Scheduling
+  - Gang Scheduling
+  - Queues
+common:
+- type: Documentation
+  name: Volcano Documentation
+  description: Official Volcano documentation.
+  url: https://volcano.sh/en/docs/
+- type: GitHubOrg
+  name: Volcano GitHub
+  description: Source code repository.
+  url: https://github.com/volcano-sh/volcano
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

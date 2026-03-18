@@ -1,0 +1,466 @@
+openapi: 3.1.0
+info:
+  title: Volcano PodGroup API
+  description: >-
+    The Volcano PodGroup API provides Kubernetes CRD endpoints for managing
+    PodGroup resources, which represent groups of pods with strong co-scheduling
+    association. PodGroups are the atomic unit of gang scheduling in Volcano,
+    defining the minimum number of pods that must be scheduled together to
+    enable all-or-nothing scheduling semantics for distributed ML training,
+    MPI jobs, and other tightly-coupled workloads.
+  version: '1.10.0'
+  contact:
+    name: Volcano Community
+    url: https://volcano.sh/en/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Volcano PodGroup Documentation
+  url: https://volcano.sh/en/docs/podgroup/
+servers:
+  - url: https://{kubernetes-api-server}
+    description: Kubernetes API server
+    variables:
+      kubernetes-api-server:
+        default: localhost:6443
+        description: Address of the Kubernetes API server
+tags:
+  - name: PodGroups
+    description: >-
+      Operations for managing Volcano PodGroup custom resources. PodGroups
+      define gang scheduling units with minimum availability requirements and
+      queue assignment.
+paths:
+  /apis/scheduling.volcano.sh/v1beta1/namespaces/{namespace}/podgroups:
+    get:
+      operationId: listNamespacedPodGroup
+      summary: List PodGroups in a namespace
+      description: >-
+        Returns all Volcano PodGroup resources in the specified namespace.
+        PodGroups are typically created automatically by the Volcano controller
+        when a Volcano Job is submitted, but can also be created manually for
+        pods without a Job parent.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/labelSelector'
+        - $ref: '#/components/parameters/fieldSelector'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/continueToken'
+      responses:
+        '200':
+          description: List of PodGroups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodGroupList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: createNamespacedPodGroup
+      summary: Create a PodGroup
+      description: >-
+        Creates a new PodGroup resource in the specified namespace. Pods can
+        reference this PodGroup via the scheduling.volcano.sh/pod-group
+        annotation to join the group and benefit from gang scheduling.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodGroup'
+      responses:
+        '201':
+          description: PodGroup created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodGroup'
+        '400':
+          description: Invalid PodGroup specification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: PodGroup with this name already exists
+  /apis/scheduling.volcano.sh/v1beta1/namespaces/{namespace}/podgroups/{name}:
+    get:
+      operationId: readNamespacedPodGroup
+      summary: Get a PodGroup
+      description: >-
+        Returns the specified PodGroup resource including its current phase,
+        pod counts, and condition information.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          description: PodGroup details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodGroup'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: PodGroup not found
+    put:
+      operationId: replaceNamespacedPodGroup
+      summary: Replace a PodGroup
+      description: >-
+        Replaces the entire PodGroup resource with the provided specification.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PodGroup'
+      responses:
+        '200':
+          description: PodGroup updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodGroup'
+        '400':
+          description: Invalid specification
+        '401':
+          description: Unauthorized
+        '404':
+          description: PodGroup not found
+    patch:
+      operationId: patchNamespacedPodGroup
+      summary: Partially update a PodGroup
+      description: >-
+        Applies a partial update to the specified PodGroup.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: PodGroup patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodGroup'
+        '400':
+          description: Invalid patch
+        '401':
+          description: Unauthorized
+        '404':
+          description: PodGroup not found
+    delete:
+      operationId: deleteNamespacedPodGroup
+      summary: Delete a PodGroup
+      description: >-
+        Deletes the specified PodGroup resource. Pods in the group that are
+        pending may be removed from scheduling consideration.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          description: PodGroup deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: PodGroup not found
+  /apis/scheduling.volcano.sh/v1beta1/podgroups:
+    get:
+      operationId: listPodGroupAllNamespaces
+      summary: List PodGroups across all namespaces
+      description: >-
+        Returns all PodGroup resources across all namespaces in the cluster.
+      tags:
+        - PodGroups
+      parameters:
+        - $ref: '#/components/parameters/labelSelector'
+        - $ref: '#/components/parameters/fieldSelector'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/continueToken'
+      responses:
+        '200':
+          description: All PodGroups in the cluster
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodGroupList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  parameters:
+    namespace:
+      name: namespace
+      in: path
+      required: true
+      description: The Kubernetes namespace of the resource.
+      schema:
+        type: string
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource.
+      schema:
+        type: string
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
+  schemas:
+    PodGroup:
+      type: object
+      description: >-
+        A Volcano PodGroup custom resource representing a set of pods that must
+        be co-scheduled together. PodGroups enable gang scheduling semantics
+        for distributed computing workloads.
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+            - scheduling.volcano.sh/v1beta1
+        kind:
+          type: string
+          enum:
+            - PodGroup
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/PodGroupSpec'
+        status:
+          $ref: '#/components/schemas/PodGroupStatus'
+    PodGroupSpec:
+      type: object
+      description: Specification of a PodGroup defining gang scheduling requirements.
+      properties:
+        minMember:
+          type: integer
+          description: >-
+            Minimum number of pods that must be scheduled simultaneously. If
+            fewer than this number of pods can be placed, no pods in the group
+            are scheduled (all-or-nothing semantics).
+          minimum: 1
+          default: 1
+        minResources:
+          type: object
+          description: >-
+            Minimum aggregate resource requests that must be satisfiable for
+            the PodGroup to be scheduled. Expressed as Kubernetes resource
+            quantities.
+          additionalProperties:
+            type: string
+          example:
+            cpu: "8"
+            memory: "16Gi"
+        queue:
+          type: string
+          description: >-
+            Name of the Volcano Queue this PodGroup belongs to. Determines
+            scheduling priority and resource quota application. Defaults to
+            the 'default' queue.
+          default: default
+        priorityClassName:
+          type: string
+          description: >-
+            Name of the PriorityClass for this PodGroup, controlling its
+            scheduling priority relative to other PodGroups.
+        minTaskMember:
+          type: object
+          description: >-
+            Map of task names to minimum member counts for per-task gang
+            scheduling requirements within a multi-task job.
+          additionalProperties:
+            type: integer
+    PodGroupStatus:
+      type: object
+      description: >-
+        Observed status of a PodGroup as reported by the Volcano scheduler,
+        including current phase and pod state counts.
+      properties:
+        phase:
+          type: string
+          description: Current scheduling phase of the PodGroup.
+          enum:
+            - Pending
+            - Running
+            - Unknown
+            - Inqueue
+            - Completing
+        occupiedBy:
+          type: string
+          description: Name of the Volcano Job that owns this PodGroup, if any.
+        conditions:
+          type: array
+          description: Conditions describing the current state of the PodGroup.
+          items:
+            $ref: '#/components/schemas/PodGroupCondition'
+        succeeded:
+          type: integer
+          format: int32
+          description: Number of pods in the Succeeded phase.
+        failed:
+          type: integer
+          format: int32
+          description: Number of pods in the Failed phase.
+        running:
+          type: integer
+          format: int32
+          description: Number of pods in the Running phase.
+    PodGroupCondition:
+      type: object
+      description: A condition describing the state of the PodGroup.
+      properties:
+        type:
+          type: string
+          description: Type of PodGroup condition.
+          enum:
+            - Unschedulable
+            - Scheduled
+        status:
+          type: string
+          enum:
+            - 'True'
+            - 'False'
+            - Unknown
+        transitionID:
+          type: string
+          description: Identifier linking this condition to a specific scheduler transition.
+        lastTransitionTime:
+          type: string
+          format: date-time
+          description: Time when this condition last transitioned.
+        reason:
+          type: string
+          description: Short reason code for the condition.
+        message:
+          type: string
+          description: Human-readable details about the condition.
+    PodGroupList:
+      type: object
+      description: A list of PodGroup resources.
+      required:
+        - apiVersion
+        - kind
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          enum:
+            - PodGroupList
+        metadata:
+          type: object
+          properties:
+            resourceVersion:
+              type: string
+        items:
+          type: array
+          description: List of PodGroup resources.
+          items:
+            $ref: '#/components/schemas/PodGroup'
+    ObjectMeta:
+      type: object
+      description: Standard Kubernetes object metadata.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the PodGroup, unique within its namespace.
+        namespace:
+          type: string
+          description: Namespace the PodGroup belongs to.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Labels for organizing and selecting the PodGroup.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Non-identifying metadata for the PodGroup.
+        resourceVersion:
+          type: string
+        uid:
+          type: string
+        creationTimestamp:
+          type: string
+          format: date-time
+    Status:
+      type: object
+      description: Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer

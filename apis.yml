@@ -16,7 +16,7 @@ tags:
 - Cloud Native
 - Incubating
 created: '2026-03-16'
-modified: '2026-03-16'
+modified: '2026-03-18'
 specificationVersion: '0.19'
 type: Index
 apis:
@@ -33,19 +33,75 @@ apis:
   properties:
   - type: Documentation
     url: https://volcano.sh/en/docs/
+  - type: Reference
+    url: https://volcano.sh/en/docs/vcjob/
+  - type: Getting Started
+    url: https://volcano.sh/en/docs/installation/
+  - type: OpenAPI
+    url: openapi/volcano-job-openapi.yml
+  - type: JSONSchema
+    url: json-schema/volcano-job-schema.json
   tags:
   - Batch Scheduling
   - Gang Scheduling
   - Queues
+- aid: volcano:volcano-queue-api
+  name: Volcano Queue API
+  description: >-
+    Kubernetes CRD for defining and managing job queues in Volcano. Queues
+    collect PodGroups and support weight-based fair-share scheduling and resource
+    quotas, providing the primary mechanism for multi-tenant resource partitioning
+    and priority-based job admission.
+  humanURL: https://volcano.sh/en/docs/v1-10-0/queue/
+  properties:
+  - type: Documentation
+    url: https://volcano.sh/en/docs/v1-10-0/queue/
+  - type: OpenAPI
+    url: openapi/volcano-queue-openapi.yml
+  tags:
+  - Batch Scheduling
+  - Queues
+  - Multi-Tenancy
+  - Kubernetes
+  - Resource Management
+- aid: volcano:volcano-podgroup-api
+  name: Volcano PodGroup API
+  description: >-
+    Kubernetes CRD that represents a group of pods with strong association,
+    used as the unit of gang scheduling in Volcano. PodGroups define the minimum
+    number of pods that must be scheduled together, enabling all-or-nothing
+    scheduling semantics for distributed training and computing workloads.
+  humanURL: https://volcano.sh/en/docs/podgroup/
+  properties:
+  - type: Documentation
+    url: https://volcano.sh/en/docs/podgroup/
+  - type: OpenAPI
+    url: openapi/volcano-podgroup-openapi.yml
+  tags:
+  - Batch Scheduling
+  - Gang Scheduling
+  - Kubernetes
+  - Pod Management
+  - Distributed Computing
 common:
+- type: Website
+  url: https://volcano.sh/en/
+- type: JSON-LD
+  url: json-ld/volcano-context.jsonld
+- type: JSONSchema
+  url: json-schema/volcano-job-schema.json
 - type: Documentation
-  name: Volcano Documentation
-  description: Official Volcano documentation.
   url: https://volcano.sh/en/docs/
-- type: GitHubOrg
-  name: Volcano GitHub
-  description: Source code repository.
+- type: Getting Started
+  url: https://volcano.sh/en/docs/installation/
+- type: Blog
+  url: https://volcano.sh/en/blog/
+- type: GitHub Organization
+  url: https://github.com/volcano-sh
+- type: GitHubRepository
   url: https://github.com/volcano-sh/volcano
+- type: Community
+  url: https://github.com/volcano-sh/community
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

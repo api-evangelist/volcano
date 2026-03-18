@@ -1,0 +1,137 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "volcano": "https://volcano.sh/vocabulary#",
+    "k8s": "https://kubernetes.io/vocabulary#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+
+    "Job": {
+      "@id": "volcano:Job",
+      "@context": {
+        "name": "schema:name",
+        "namespace": "k8s:namespace",
+        "queue": {
+          "@id": "volcano:queue",
+          "@type": "@id"
+        },
+        "minAvailable": "volcano:minAvailable",
+        "tasks": {
+          "@id": "volcano:tasks",
+          "@container": "@set"
+        },
+        "policies": {
+          "@id": "volcano:lifecyclePolicies",
+          "@container": "@set"
+        },
+        "plugins": "volcano:plugins",
+        "maxRetry": "volcano:maxRetry",
+        "schedulerName": "volcano:schedulerName",
+        "creationTimestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "TaskSpec": {
+      "@id": "volcano:Task",
+      "@context": {
+        "name": "schema:name",
+        "replicas": "volcano:replicaCount",
+        "policies": {
+          "@id": "volcano:lifecyclePolicies",
+          "@container": "@set"
+        },
+        "topologyPolicy": "volcano:topologyPolicy",
+        "maxRetry": "volcano:maxRetry",
+        "dependsOn": "volcano:taskDependencies"
+      }
+    },
+
+    "Queue": {
+      "@id": "volcano:Queue",
+      "@context": {
+        "name": "schema:name",
+        "weight": "volcano:schedulingWeight",
+        "capability": "volcano:resourceCapacity",
+        "reclaimable": "volcano:isReclaimable",
+        "state": "volcano:queueState",
+        "guarantee": "volcano:guaranteedResources",
+        "parent": {
+          "@id": "volcano:parentQueue",
+          "@type": "@id"
+        },
+        "creationTimestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "QueueStatus": {
+      "@id": "volcano:QueueStatus",
+      "@context": {
+        "state": "volcano:queueState",
+        "pending": "volcano:pendingCount",
+        "running": "volcano:runningCount",
+        "inqueue": "volcano:inqueuedCount",
+        "allocated": "volcano:allocatedResources",
+        "guaranteed": "volcano:guaranteedResources"
+      }
+    },
+
+    "PodGroup": {
+      "@id": "volcano:PodGroup",
+      "@context": {
+        "name": "schema:name",
+        "namespace": "k8s:namespace",
+        "minMember": "volcano:minMember",
+        "minResources": "volcano:minimumResources",
+        "queue": {
+          "@id": "volcano:queue",
+          "@type": "@id"
+        },
+        "priorityClassName": "k8s:priorityClass",
+        "phase": "volcano:podGroupPhase",
+        "occupiedBy": {
+          "@id": "volcano:ownerJob",
+          "@type": "@id"
+        },
+        "creationTimestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "LifecyclePolicy": {
+      "@id": "volcano:LifecyclePolicy",
+      "@context": {
+        "action": "volcano:policyAction",
+        "event": "volcano:triggerEvent",
+        "events": {
+          "@id": "volcano:triggerEvents",
+          "@container": "@set"
+        },
+        "exitCode": "volcano:triggerExitCode",
+        "timeout": "volcano:policyTimeout"
+      }
+    },
+
+    "JobStatus": {
+      "@id": "volcano:JobStatus",
+      "@context": {
+        "phase": "volcano:jobPhase",
+        "retryCount": "volcano:retryCount",
+        "runningDuration": {
+          "@id": "schema:duration",
+          "@type": "xsd:string"
+        },
+        "minAvailable": "volcano:minAvailable"
+      }
+    }
+  }
+}

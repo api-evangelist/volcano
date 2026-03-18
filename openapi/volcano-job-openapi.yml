@@ -1,0 +1,628 @@
+openapi: 3.1.0
+info:
+  title: Volcano Job API
+  description: >-
+    The Volcano Job API provides Kubernetes CRD endpoints for defining and
+    managing batch workloads using Volcano's Job resource (vcjob). Volcano Jobs
+    support multiple task types, lifecycle policies, gang scheduling, and
+    integration with frameworks including TensorFlow, PyTorch, Spark, and MPI.
+    All operations go through the Kubernetes API server.
+  version: '1.10.0'
+  contact:
+    name: Volcano Community
+    url: https://volcano.sh/en/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Volcano Job Documentation
+  url: https://volcano.sh/en/docs/vcjob/
+servers:
+  - url: https://{kubernetes-api-server}
+    description: Kubernetes API server
+    variables:
+      kubernetes-api-server:
+        default: localhost:6443
+        description: Address of the Kubernetes API server
+tags:
+  - name: Jobs
+    description: >-
+      Operations for managing Volcano Job (vcjob) custom resources. A Volcano
+      Job defines a batch workload with one or more task groups, lifecycle
+      policies, and scheduling requirements.
+paths:
+  /apis/batch.volcano.sh/v1alpha1/namespaces/{namespace}/jobs:
+    get:
+      operationId: listNamespacedJob
+      summary: List Volcano Jobs in a namespace
+      description: >-
+        Returns a list of all Volcano Job resources in the specified namespace.
+        Supports filtering by label selector and field selector for targeted
+        queries.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/labelSelector'
+        - $ref: '#/components/parameters/fieldSelector'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/continueToken'
+      responses:
+        '200':
+          description: List of Volcano Jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: createNamespacedJob
+      summary: Create a Volcano Job
+      description: >-
+        Creates a new Volcano Job resource in the specified namespace. The Job
+        spec defines tasks, plugins, lifecycle policies, queue assignment, and
+        minimum available pods for gang scheduling.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '201':
+          description: Job created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid Job specification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Job with this name already exists
+  /apis/batch.volcano.sh/v1alpha1/namespaces/{namespace}/jobs/{name}:
+    get:
+      operationId: readNamespacedJob
+      summary: Get a Volcano Job
+      description: >-
+        Returns the specified Volcano Job resource including its current phase,
+        task statuses, and condition information.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          description: Volcano Job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Job not found
+    put:
+      operationId: replaceNamespacedJob
+      summary: Replace a Volcano Job
+      description: >-
+        Replaces the entire Volcano Job resource with the provided specification.
+        The resource version in metadata must match to prevent conflicting updates.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        '200':
+          description: Job updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid specification
+        '401':
+          description: Unauthorized
+        '404':
+          description: Job not found
+        '409':
+          description: Conflict - resource version mismatch
+    patch:
+      operationId: patchNamespacedJob
+      summary: Partially update a Volcano Job
+      description: >-
+        Applies a partial update to the specified Volcano Job using JSON Merge
+        Patch or Strategic Merge Patch.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              type: object
+          application/strategic-merge-patch+json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Job patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '400':
+          description: Invalid patch
+        '401':
+          description: Unauthorized
+        '404':
+          description: Job not found
+    delete:
+      operationId: deleteNamespacedJob
+      summary: Delete a Volcano Job
+      description: >-
+        Deletes the specified Volcano Job resource and all pods associated with it.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/namespace'
+        - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          description: Job deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Job not found
+  /apis/batch.volcano.sh/v1alpha1/jobs:
+    get:
+      operationId: listJobAllNamespaces
+      summary: List Volcano Jobs across all namespaces
+      description: >-
+        Returns all Volcano Job resources across all namespaces in the cluster.
+        Requires cluster-level list permissions.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/labelSelector'
+        - $ref: '#/components/parameters/fieldSelector'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/continueToken'
+      responses:
+        '200':
+          description: All Volcano Jobs in the cluster
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  parameters:
+    namespace:
+      name: namespace
+      in: path
+      required: true
+      description: The Kubernetes namespace of the resource.
+      schema:
+        type: string
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource.
+      schema:
+        type: string
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
+  schemas:
+    Job:
+      type: object
+      description: >-
+        A Volcano Job (vcjob) custom resource defining a batch workload with
+        multiple task types, lifecycle policies, gang scheduling, and queue
+        assignment.
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+            - batch.volcano.sh/v1alpha1
+        kind:
+          type: string
+          enum:
+            - Job
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/JobSpec'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+    JobSpec:
+      type: object
+      description: Specification of the Volcano Job defining workload structure and scheduling.
+      properties:
+        schedulerName:
+          type: string
+          description: >-
+            Name of the scheduler to use. Defaults to 'volcano'. Can be set to
+            a different scheduler name if needed.
+          default: volcano
+        minAvailable:
+          type: integer
+          description: >-
+            Minimum number of pods that must be scheduled together for gang
+            scheduling. If fewer than this many pods can be scheduled, none are
+            scheduled.
+          minimum: 0
+        volumes:
+          type: array
+          description: Volumes to mount into task containers.
+          items:
+            type: object
+        tasks:
+          type: array
+          description: >-
+            List of task groups defining the pods in this job. Each task can
+            have a different pod template, replica count, and policies.
+          items:
+            $ref: '#/components/schemas/TaskSpec'
+        policies:
+          type: array
+          description: >-
+            Lifecycle policies applied at the job level, controlling how the
+            job responds to events such as pod failures or completions.
+          items:
+            $ref: '#/components/schemas/LifecyclePolicy'
+        plugins:
+          type: object
+          description: >-
+            Map of plugin names to their arguments. Plugins inject environment
+            variables and init containers for frameworks like TensorFlow, MPI,
+            and PyTorch.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        runningDuration:
+          type: string
+          description: >-
+            Maximum duration the job is allowed to run. After this duration the
+            job will be terminated if it has not completed.
+        queue:
+          type: string
+          description: >-
+            Name of the Volcano Queue to submit this job to. Determines the
+            scheduling priority and resource quotas that apply.
+        priorityClassName:
+          type: string
+          description: Name of the PriorityClass for this job.
+        maxRetry:
+          type: integer
+          description: Maximum number of times the job will be retried on failure.
+          minimum: 0
+        ttlSecondsAfterFinished:
+          type: integer
+          description: >-
+            Number of seconds after the job finishes before it is automatically
+            deleted. If not set, the job is not automatically deleted.
+          minimum: 0
+    TaskSpec:
+      type: object
+      description: >-
+        A task group within a Volcano Job, defining a set of pods with a shared
+        pod template and task-level lifecycle policies.
+      required:
+        - name
+        - replicas
+        - template
+      properties:
+        name:
+          type: string
+          description: Unique name for this task within the job.
+        replicas:
+          type: integer
+          description: Number of pod replicas for this task.
+          minimum: 1
+        template:
+          type: object
+          description: >-
+            Kubernetes pod template spec defining the containers, resources,
+            and configuration for pods in this task.
+        policies:
+          type: array
+          description: >-
+            Lifecycle policies applied at the task level, overriding job-level
+            policies for this task's pods.
+          items:
+            $ref: '#/components/schemas/LifecyclePolicy'
+        topologyPolicy:
+          type: string
+          description: >-
+            NUMA topology policy for the task's pods, controlling how CPU and
+            memory resources are allocated relative to NUMA nodes.
+          enum:
+            - none
+            - best-effort
+            - restricted
+            - single-numa-node
+        maxRetry:
+          type: integer
+          description: Maximum retries for this task independently of the job retry limit.
+          minimum: 0
+        dependsOn:
+          type: object
+          description: >-
+            Defines task dependencies controlling execution order. Tasks can
+            be configured to start only after specified tasks complete.
+          properties:
+            name:
+              type: array
+              description: Names of tasks that must complete before this task starts.
+              items:
+                type: string
+            iteration:
+              type: string
+              description: Iteration strategy for dependency evaluation.
+    LifecyclePolicy:
+      type: object
+      description: >-
+        A lifecycle policy rule controlling how the job or task responds to
+        events such as pod failures, completions, or external signals.
+      properties:
+        action:
+          type: string
+          description: Action to take when the policy condition is triggered.
+          enum:
+            - AbortJob
+            - RestartJob
+            - RestartTask
+            - TerminateJob
+            - CompleteJob
+            - ResumeJob
+            - SyncJob
+            - EnqueueJob
+        event:
+          type: string
+          description: Event type that triggers this policy.
+          enum:
+            - PodFailed
+            - PodEvicted
+            - TaskCompleted
+            - AnyEvent
+            - CommandIssued
+            - JobUnknown
+            - JobUpdated
+            - OutOfSync
+            - PodPending
+            - PodRunning
+            - PodSucceeded
+        events:
+          type: array
+          description: Multiple event types that trigger this policy.
+          items:
+            type: string
+        exitCode:
+          type: integer
+          description: >-
+            Exit code from a container that triggers this policy. Used to
+            handle specific failure codes differently.
+        timeout:
+          type: string
+          description: >-
+            Duration after which the policy triggers if the condition persists.
+    JobStatus:
+      type: object
+      description: Observed status of a Volcano Job as reported by the controller.
+      properties:
+        state:
+          type: object
+          description: Current phase and condition of the job.
+          properties:
+            phase:
+              type: string
+              description: Current phase of the job lifecycle.
+              enum:
+                - Pending
+                - Aborting
+                - Aborted
+                - Running
+                - Restarting
+                - Completing
+                - Completed
+                - Terminating
+                - Terminated
+                - Failed
+            reason:
+              type: string
+              description: Reason for the current phase.
+            message:
+              type: string
+              description: Human-readable message describing the current state.
+            lastTransitionTime:
+              type: string
+              format: date-time
+              description: Time of last phase transition.
+        minAvailable:
+          type: integer
+          description: Minimum pods required for this job to run.
+        version:
+          type: integer
+          format: int32
+          description: Internal version counter for the job.
+        retryCount:
+          type: integer
+          format: int32
+          description: Number of times the job has been retried.
+        runningDuration:
+          type: string
+          description: Duration the job has been in the Running phase.
+        taskStatusCount:
+          type: object
+          description: >-
+            Map of task names to pod phase counts, providing per-task status
+            breakdown.
+          additionalProperties:
+            type: object
+            properties:
+              phase:
+                type: object
+                additionalProperties:
+                  type: integer
+        conditions:
+          type: array
+          description: Detailed conditions for the job.
+          items:
+            $ref: '#/components/schemas/JobCondition'
+    JobCondition:
+      type: object
+      description: A condition in the status of a Volcano Job.
+      properties:
+        status:
+          type: string
+          enum:
+            - 'True'
+            - 'False'
+            - Unknown
+        type:
+          type: string
+        transitionID:
+          type: string
+        lastTransitionTime:
+          type: string
+          format: date-time
+        reason:
+          type: string
+        message:
+          type: string
+    JobList:
+      type: object
+      description: A list of Volcano Job resources.
+      required:
+        - apiVersion
+        - kind
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          enum:
+            - JobList
+        metadata:
+          type: object
+          properties:
+            resourceVersion:
+              type: string
+            continue:
+              type: string
+        items:
+          type: array
+          description: List of Jobs.
+          items:
+            $ref: '#/components/schemas/Job'
+    ObjectMeta:
+      type: object
+      description: Standard Kubernetes object metadata.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the resource, unique within its namespace.
+        namespace:
+          type: string
+          description: Namespace the resource belongs to.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Labels for organizing and selecting resources.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Non-identifying metadata for the resource.
+        resourceVersion:
+          type: string
+          description: Internal version for optimistic concurrency.
+        generation:
+          type: integer
+          format: int64
+        uid:
+          type: string
+        creationTimestamp:
+          type: string
+          format: date-time
+    Status:
+      type: object
+      description: Standard Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer

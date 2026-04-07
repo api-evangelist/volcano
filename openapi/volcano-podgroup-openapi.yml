@@ -35,7 +35,7 @@ paths:
   /apis/scheduling.volcano.sh/v1beta1/namespaces/{namespace}/podgroups:
     get:
       operationId: listNamespacedPodGroup
-      summary: List PodGroups in a namespace
+      summary: Volcano List PodGroups in a namespace
       description: >-
         Returns all Volcano PodGroup resources in the specified namespace.
         PodGroups are typically created automatically by the Volcano controller
@@ -62,7 +62,7 @@ paths:
           description: Forbidden
     post:
       operationId: createNamespacedPodGroup
-      summary: Create a PodGroup
+      summary: Volcano Create a PodGroup
       description: >-
         Creates a new PodGroup resource in the specified namespace. Pods can
         reference this PodGroup via the scheduling.volcano.sh/pod-group
@@ -99,7 +99,7 @@ paths:
   /apis/scheduling.volcano.sh/v1beta1/namespaces/{namespace}/podgroups/{name}:
     get:
       operationId: readNamespacedPodGroup
-      summary: Get a PodGroup
+      summary: Volcano Get a PodGroup
       description: >-
         Returns the specified PodGroup resource including its current phase,
         pod counts, and condition information.
@@ -123,7 +123,7 @@ paths:
           description: PodGroup not found
     put:
       operationId: replaceNamespacedPodGroup
-      summary: Replace a PodGroup
+      summary: Volcano Replace a PodGroup
       description: >-
         Replaces the entire PodGroup resource with the provided specification.
       tags:
@@ -152,7 +152,7 @@ paths:
           description: PodGroup not found
     patch:
       operationId: patchNamespacedPodGroup
-      summary: Partially update a PodGroup
+      summary: Volcano Partially update a PodGroup
       description: >-
         Applies a partial update to the specified PodGroup.
       tags:
@@ -181,7 +181,7 @@ paths:
           description: PodGroup not found
     delete:
       operationId: deleteNamespacedPodGroup
-      summary: Delete a PodGroup
+      summary: Volcano Delete a PodGroup
       description: >-
         Deletes the specified PodGroup resource. Pods in the group that are
         pending may be removed from scheduling consideration.
@@ -202,7 +202,7 @@ paths:
   /apis/scheduling.volcano.sh/v1beta1/podgroups:
     get:
       operationId: listPodGroupAllNamespaces
-      summary: List PodGroups across all namespaces
+      summary: Volcano List PodGroups across all namespaces
       description: >-
         Returns all PodGroup resources across all namespaces in the cluster.
       tags:

@@ -1,0 +1,301 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Volcano Batch Workload Management"
+  description: >-
+    Unified capability for managing Volcano batch workloads on Kubernetes.
+    Combines Job, Queue, and PodGroup APIs to orchestrate distributed ML training,
+    HPC simulation, big data processing, and scientific computing workflows.
+    Designed for ML platform engineers, data engineers, and HPC cluster operators.
+  tags:
+    - Volcano
+    - Kubernetes
+    - Batch Scheduling
+    - Machine Learning
+    - HPC
+    - Cloud Native
+    - CNCF
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      KUBERNETES_API_SERVER: KUBERNETES_API_SERVER
+      KUBERNETES_TOKEN: KUBERNETES_TOKEN
+
+capability:
+  consumes:
+    - import: volcano-jobs
+      location: ./shared/volcano-jobs.yaml
+    - import: volcano-queues
+      location: ./shared/volcano-queues.yaml
+    - import: volcano-podgroups
+      location: ./shared/volcano-podgroups.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: volcano-batch-api
+      description: "Unified REST API for Volcano batch workload management."
+      resources:
+        - path: /v1/jobs/{namespace}
+          name: jobs
+          description: "Manage Volcano batch jobs."
+          operations:
+            - method: GET
+              name: list-namespaced-jobs
+              description: "List all Volcano Jobs in a namespace."
+              call: "volcano-jobs.list-namespaced-jobs"
+              with:
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-namespaced-job
+              description: "Submit a new batch workload (ML training, HPC, Spark)."
+              call: "volcano-jobs.create-namespaced-job"
+              with:
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/jobs/{namespace}/{name}
+          name: job-detail
+          description: "Inspect and manage a specific batch job."
+          operations:
+            - method: GET
+              name: get-namespaced-job
+              description: "Get job status and configuration."
+              call: "volcano-jobs.get-namespaced-job"
+              with:
+                namespace: "rest.namespace"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-namespaced-job
+              description: "Cancel and remove a batch job."
+              call: "volcano-jobs.delete-namespaced-job"
+              with:
+                namespace: "rest.namespace"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/queues
+          name: queues
+          description: "Manage scheduling queues for resource partitioning."
+          operations:
+            - method: GET
+              name: list-queues
+              description: "List all scheduling queues."
+              call: "volcano-queues.list-queues"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-queue
+              description: "Create a new scheduling queue."
+              call: "volcano-queues.create-queue"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/queues/{name}
+          name: queue-detail
+          description: "Inspect or manage a specific queue."
+          operations:
+            - method: GET
+              name: get-queue
+              description: "Get queue configuration and status."
+              call: "volcano-queues.get-queue"
+              with:
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-queue
+              description: "Delete a scheduling queue."
+              call: "volcano-queues.delete-queue"
+              with:
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/podgroups/{namespace}
+          name: podgroups
+          description: "Manage PodGroups for gang scheduling."
+          operations:
+            - method: GET
+              name: list-namespaced-podgroups
+              description: "List PodGroups in a namespace."
+              call: "volcano-podgroups.list-namespaced-podgroups"
+              with:
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-namespaced-podgroup
+              description: "Create a PodGroup for gang-scheduled workloads."
+              call: "volcano-podgroups.create-namespaced-podgroup"
+              with:
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/podgroups/{namespace}/{name}
+          name: podgroup-detail
+          description: "Inspect a specific PodGroup."
+          operations:
+            - method: GET
+              name: get-namespaced-podgroup
+              description: "Get PodGroup status."
+              call: "volcano-podgroups.get-namespaced-podgroup"
+              with:
+                namespace: "rest.namespace"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: volcano-batch-mcp
+      transport: http
+      description: "MCP server for AI-assisted Volcano batch workload management."
+      tools:
+        - name: list-batch-jobs
+          description: "List Volcano batch jobs in a Kubernetes namespace (ML training, Spark, HPC)."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-jobs.list-namespaced-jobs"
+          with:
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: submit-batch-job
+          description: "Submit a new distributed batch workload to Volcano (PyTorch, TensorFlow, Spark, MPI)."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "volcano-jobs.create-namespaced-job"
+          with:
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: inspect-batch-job
+          description: "Get detailed status and phase of a Volcano batch job."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-jobs.get-namespaced-job"
+          with:
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: cancel-batch-job
+          description: "Cancel and delete a Volcano batch job and its associated pods."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "volcano-jobs.delete-namespaced-job"
+          with:
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-cluster-jobs
+          description: "List all Volcano batch jobs across all namespaces in the cluster."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-jobs.list-jobs-all-namespaces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-scheduling-queues
+          description: "List all Volcano scheduling queues and their resource allocations."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-queues.list-queues"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: inspect-scheduling-queue
+          description: "Get configuration, capacity, and status of a Volcano scheduling queue."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-queues.get-queue"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-scheduling-queue
+          description: "Create a new Volcano queue for multi-tenant resource partitioning."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "volcano-queues.create-queue"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-podgroups
+          description: "List PodGroups used for gang-scheduling coordination in a namespace."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-podgroups.list-namespaced-podgroups"
+          with:
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: inspect-podgroup
+          description: "Get the status of a PodGroup to check gang-scheduling progress."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-podgroups.get-namespaced-podgroup"
+          with:
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."

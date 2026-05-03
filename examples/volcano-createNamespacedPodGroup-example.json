@@ -1,0 +1,50 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://kubernetes-api-server/apis/scheduling.volcano.sh/v1beta1/namespaces/ml-workloads/podgroups",
+    "headers": {
+      "Authorization": "Bearer <serviceaccount-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "apiVersion": "scheduling.volcano.sh/v1beta1",
+      "kind": "PodGroup",
+      "metadata": {
+        "name": "spark-job-pg",
+        "namespace": "ml-workloads"
+      },
+      "spec": {
+        "minMember": 5,
+        "queue": "ml-queue",
+        "priorityClassName": "normal-priority",
+        "minTaskMember": {
+          "spark-driver": 1,
+          "spark-executor": 4
+        },
+        "minResources": {
+          "cpu": "20",
+          "memory": "80Gi"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "apiVersion": "scheduling.volcano.sh/v1beta1",
+      "kind": "PodGroup",
+      "metadata": {
+        "name": "spark-job-pg",
+        "namespace": "ml-workloads",
+        "uid": "p1q2r3s4-t5u6-7890-abcd-ef1234567890",
+        "resourceVersion": "67890",
+        "creationTimestamp": "2026-05-03T10:05:00Z"
+      },
+      "status": {
+        "phase": "Pending",
+        "scheduled": 0,
+        "running": 0
+      }
+    }
+  }
+}

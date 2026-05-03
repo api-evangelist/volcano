@@ -1,0 +1,68 @@
+extends: spectral:oas
+rules:
+  volcano-operation-summary-title-case:
+    description: All operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-zA-Z]*(\\s[A-Z][a-zA-Z]*)*)"
+
+  volcano-operation-ids-camel-case:
+    description: OperationIds must use camelCase.
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  volcano-tags-required:
+    description: Each operation must have at least one tag.
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  volcano-kubernetes-api-group-in-path:
+    description: Paths must include a Kubernetes API group (e.g. batch.volcano.sh or scheduling.volcano.sh).
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: ".*volcano\\.sh.*"
+
+  volcano-server-variable-required:
+    description: Server URL must use a variable for the kubernetes-api-server address.
+    severity: info
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: ".*\\{.*\\}.*"
+
+  volcano-namespace-path-param:
+    description: Namespaced resource paths must include a namespace parameter.
+    severity: warn
+    given: "$.paths[*namespaces*][get,post,put,patch,delete].parameters[*]"
+    then:
+      field: name
+      function: enumeration
+      functionOptions:
+        values:
+          - namespace
+          - name
+          - labelSelector
+          - fieldSelector
+          - limit
+          - continue
+
+  volcano-list-pagination-support:
+    description: List operations should support limit and continue query parameters.
+    severity: info
+    given: "$.paths[*][get][operationId][?(@.match(/^list/))]"
+    then:
+      function: truthy

@@ -1,0 +1,117 @@
+{
+  "title": "Volcano Job Structure",
+  "description": "Field-level documentation for the Volcano Job (vcjob) CRD resource.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "apiVersion",
+      "type": "string",
+      "required": true,
+      "description": "Always 'batch.volcano.sh/v1alpha1'."
+    },
+    {
+      "name": "kind",
+      "type": "string",
+      "required": true,
+      "description": "Always 'Job'."
+    },
+    {
+      "name": "metadata",
+      "type": "ObjectMeta",
+      "required": true,
+      "description": "Standard Kubernetes object metadata (name, namespace, labels)."
+    },
+    {
+      "name": "spec",
+      "type": "JobSpec",
+      "required": true,
+      "description": "Desired state of the batch workload.",
+      "fields": [
+        {
+          "name": "schedulerName",
+          "type": "string",
+          "default": "volcano",
+          "description": "Scheduler name. Defaults to 'volcano'."
+        },
+        {
+          "name": "minAvailable",
+          "type": "integer",
+          "description": "Minimum pods needed for gang scheduling (all-or-nothing threshold)."
+        },
+        {
+          "name": "queue",
+          "type": "string",
+          "description": "Volcano Queue name to submit this job to."
+        },
+        {
+          "name": "priorityClassName",
+          "type": "string",
+          "description": "Kubernetes PriorityClass for scheduling priority."
+        },
+        {
+          "name": "maxRetry",
+          "type": "integer",
+          "description": "Maximum number of job-level retries on failure."
+        },
+        {
+          "name": "ttlSecondsAfterFinished",
+          "type": "integer",
+          "description": "Auto-delete the job N seconds after completion."
+        },
+        {
+          "name": "tasks",
+          "type": "array<TaskSpec>",
+          "description": "List of task groups within the job.",
+          "fields": [
+            {"name": "name", "type": "string", "required": true, "description": "Unique task name."},
+            {"name": "replicas", "type": "integer", "required": true, "description": "Pod replica count for this task."},
+            {"name": "template", "type": "PodTemplateSpec", "required": true, "description": "Kubernetes pod template."},
+            {"name": "policies", "type": "array<LifecyclePolicy>", "description": "Task-level lifecycle policies."},
+            {"name": "topologyPolicy", "type": "string", "description": "NUMA topology policy: none|best-effort|restricted|single-numa-node."},
+            {"name": "maxRetry", "type": "integer", "description": "Task-level retry limit."},
+            {"name": "dependsOn", "type": "object", "description": "Task dependency configuration."}
+          ]
+        },
+        {
+          "name": "policies",
+          "type": "array<LifecyclePolicy>",
+          "description": "Job-level lifecycle policies controlling event-action mappings.",
+          "fields": [
+            {"name": "event", "type": "string", "description": "Triggering event: PodFailed|PodEvicted|TaskCompleted|etc."},
+            {"name": "action", "type": "string", "description": "Action: AbortJob|RestartJob|CompleteJob|TerminateJob|etc."},
+            {"name": "exitCode", "type": "integer", "description": "Container exit code triggering this policy."},
+            {"name": "timeout", "type": "string", "description": "Duration threshold before policy fires."}
+          ]
+        },
+        {
+          "name": "plugins",
+          "type": "object",
+          "description": "Framework plugins: pytorch|tensorflow|spark|mpi — inject env vars and init containers."
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "type": "JobStatus",
+      "required": false,
+      "description": "Observed state reported by the Volcano controller.",
+      "fields": [
+        {
+          "name": "state.phase",
+          "type": "string",
+          "description": "Phase: Pending|Running|Completing|Completed|Aborting|Aborted|Terminating|Terminated|Failed."
+        },
+        {
+          "name": "retryCount",
+          "type": "integer",
+          "description": "Number of retries so far."
+        },
+        {
+          "name": "taskStatusCount",
+          "type": "object",
+          "description": "Per-task pod phase counts."
+        }
+      ]
+    }
+  ]
+}

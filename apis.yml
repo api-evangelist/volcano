@@ -6,6 +6,7 @@ description: >-
   capabilities including gang scheduling, fair-share scheduling, queue
   management, and job lifecycle management for batch workloads such as
   machine learning training, big data processing, and scientific computing.
+  Volcano extends Kubernetes with three CRDs: Job (vcjob), Queue, and PodGroup.
 url: https://volcano.sh
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -15,8 +16,9 @@ tags:
   - Incubating
   - Kubernetes
   - Scheduling
+  - Machine Learning
 created: '2026-03-16'
-modified: '2026-03-18'
+modified: '2026-05-03'
 specificationVersion: '0.19'
 type: Index
 apis:
@@ -90,6 +92,14 @@ common:
     url: json-ld/volcano-context.jsonld
   - type: JSONSchema
     url: json-schema/volcano-job-schema.json
+  - type: JSONStructure
+    url: json-structure/volcano-job-structure.json
+  - type: Vocabulary
+    url: vocabulary/volcano-vocabulary.yml
+  - type: SpectralRules
+    url: rules/volcano-rules.yml
+  - type: NaftikoCapability
+    url: capabilities/batch-workload-management.yaml
   - type: Documentation
     url: https://volcano.sh/en/docs/
   - type: Getting Started

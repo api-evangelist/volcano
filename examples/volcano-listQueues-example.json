@@ -1,0 +1,59 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://kubernetes-api-server/apis/scheduling.volcano.sh/v1beta1/queues",
+    "headers": {
+      "Authorization": "Bearer <serviceaccount-token>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "apiVersion": "scheduling.volcano.sh/v1beta1",
+      "kind": "QueueList",
+      "metadata": {
+        "resourceVersion": "99999"
+      },
+      "items": [
+        {
+          "apiVersion": "scheduling.volcano.sh/v1beta1",
+          "kind": "Queue",
+          "metadata": {
+            "name": "ml-queue",
+            "uid": "q1a2b3c4-d5e6-7890-abcd-ef1234567890"
+          },
+          "spec": {
+            "weight": 10,
+            "capability": {
+              "cpu": "100",
+              "memory": "500Gi",
+              "nvidia.com/gpu": "20"
+            },
+            "reclaimable": true
+          },
+          "status": {
+            "state": "Open",
+            "running": 4,
+            "pending": 1,
+            "completed": 12
+          }
+        },
+        {
+          "apiVersion": "scheduling.volcano.sh/v1beta1",
+          "kind": "Queue",
+          "metadata": {
+            "name": "default"
+          },
+          "spec": {
+            "weight": 1
+          },
+          "status": {
+            "state": "Open",
+            "running": 0,
+            "pending": 0
+          }
+        }
+      ]
+    }
+  }
+}

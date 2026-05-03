@@ -1,0 +1,252 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Volcano Job API"
+  description: >-
+    Kubernetes CRD API for managing Volcano batch Jobs (vcjob). Supports
+    creating distributed ML/HPC workloads with gang scheduling, multi-task
+    groups, lifecycle policies, and framework plugins (PyTorch, TensorFlow,
+    Spark, MPI).
+  tags:
+    - Volcano
+    - Kubernetes
+    - Batch Scheduling
+    - Machine Learning
+    - HPC
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      KUBERNETES_API_SERVER: KUBERNETES_API_SERVER
+      KUBERNETES_TOKEN: KUBERNETES_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: volcano-jobs
+      baseUri: "https://{{KUBERNETES_API_SERVER}}"
+      description: "Volcano Job CRD API via Kubernetes API server."
+      authentication:
+        type: bearer
+        token: "{{KUBERNETES_TOKEN}}"
+      resources:
+        - name: namespaced-jobs
+          path: /apis/batch.volcano.sh/v1alpha1/namespaces/{namespace}/jobs
+          description: "Volcano Jobs in a namespace."
+          operations:
+            - name: list-namespaced-jobs
+              method: GET
+              description: "List all Volcano Jobs in a namespace."
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Kubernetes namespace."
+                - name: labelSelector
+                  in: query
+                  type: string
+                  required: false
+                  description: "Label selector filter."
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Max results per page."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: create-namespaced-job
+              method: POST
+              description: "Create a new Volcano Job."
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                  description: "Kubernetes namespace."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  apiVersion: "batch.volcano.sh/v1alpha1"
+                  kind: "Job"
+
+        - name: namespaced-job-detail
+          path: /apis/batch.volcano.sh/v1alpha1/namespaces/{namespace}/jobs/{name}
+          description: "Operate on a specific Volcano Job."
+          operations:
+            - name: get-namespaced-job
+              method: GET
+              description: "Get a specific Volcano Job."
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: delete-namespaced-job
+              method: DELETE
+              description: "Delete a Volcano Job."
+              inputParameters:
+                - name: namespace
+                  in: path
+                  type: string
+                  required: true
+                - name: name
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: cluster-jobs
+          path: /apis/batch.volcano.sh/v1alpha1/jobs
+          description: "List Volcano Jobs across all namespaces."
+          operations:
+            - name: list-jobs-all-namespaces
+              method: GET
+              description: "List all Volcano Jobs cluster-wide."
+              inputParameters:
+                - name: labelSelector
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: volcano-jobs-rest
+      resources:
+        - path: /v1/jobs/{namespace}
+          name: jobs
+          description: "Manage Volcano Jobs."
+          operations:
+            - method: GET
+              name: list-namespaced-jobs
+              description: "List jobs in namespace."
+              call: "volcano-jobs.list-namespaced-jobs"
+              with:
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-namespaced-job
+              description: "Create a job."
+              call: "volcano-jobs.create-namespaced-job"
+              with:
+                namespace: "rest.namespace"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/jobs/{namespace}/{name}
+          name: job-detail
+          description: "Get or delete a specific Job."
+          operations:
+            - method: GET
+              name: get-namespaced-job
+              description: "Get a job."
+              call: "volcano-jobs.get-namespaced-job"
+              with:
+                namespace: "rest.namespace"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-namespaced-job
+              description: "Delete a job."
+              call: "volcano-jobs.delete-namespaced-job"
+              with:
+                namespace: "rest.namespace"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: volcano-jobs-mcp
+      transport: http
+      tools:
+        - name: list-volcano-jobs
+          description: "List Volcano batch jobs in a Kubernetes namespace."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-jobs.list-namespaced-jobs"
+          with:
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-volcano-job
+          description: "Create a new Volcano batch job for ML/HPC workloads."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "volcano-jobs.create-namespaced-job"
+          with:
+            namespace: "tools.namespace"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-volcano-job
+          description: "Get details and status of a specific Volcano job."
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "volcano-jobs.get-namespaced-job"
+          with:
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-volcano-job
+          description: "Delete a Volcano job and its associated pods."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "volcano-jobs.delete-namespaced-job"
+          with:
+            namespace: "tools.namespace"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."

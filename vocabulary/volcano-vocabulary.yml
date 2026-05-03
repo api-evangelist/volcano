@@ -1,0 +1,117 @@
+vocabulary:
+  name: Volcano Vocabulary
+  description: >-
+    Domain vocabulary for Volcano — the CNCF incubating batch scheduling and
+    high-performance computing scheduler for Kubernetes. Covers scheduling
+    concepts, CRD resources, and workload management terminology.
+  version: '2026-05-03'
+  terms:
+    - term: Gang Scheduling
+      definition: >-
+        An all-or-nothing scheduling strategy where all pods in a group must
+        be schedulable simultaneously before any are placed on nodes. Prevents
+        partial deployments that would deadlock distributed jobs waiting for
+        resources that will never arrive.
+      tags:
+        - Scheduling
+        - Core Concept
+
+    - term: Volcano Job (vcjob)
+      definition: >-
+        The primary Volcano CRD (Custom Resource Definition) representing a
+        batch workload. A Job contains one or more task groups, lifecycle policies,
+        queue assignment, and framework plugins. Extends Kubernetes Jobs with
+        multi-task and gang scheduling support.
+      tags:
+        - CRD
+        - Core Concept
+
+    - term: Queue
+      definition: >-
+        A cluster-scoped Volcano CRD representing a scheduling partition.
+        Queues have a weight for fair-share scheduling, optional resource
+        capacity limits, and can be opened, closed, or placed in preemptable
+        state. Jobs are submitted to a named queue.
+      tags:
+        - CRD
+        - Resource Management
+
+    - term: PodGroup
+      definition: >-
+        A namespaced Volcano CRD defining a set of pods that must be scheduled
+        as a group. PodGroups are the atomic unit of gang scheduling — if
+        minMember pods cannot be placed, none are placed.
+      tags:
+        - CRD
+        - Gang Scheduling
+
+    - term: Fair Share Scheduling
+      definition: >-
+        A scheduling algorithm where available cluster resources are distributed
+        proportionally among queues based on their weight, preventing any single
+        queue from monopolizing the cluster.
+      tags:
+        - Scheduling
+
+    - term: MinAvailable
+      definition: >-
+        A Job or PodGroup field specifying the minimum number of pods that must
+        be simultaneously schedulable. This is the threshold for gang scheduling.
+      tags:
+        - Configuration
+
+    - term: Lifecycle Policy
+      definition: >-
+        A rule mapping job or pod events (PodFailed, PodEvicted, TaskCompleted)
+        to actions (AbortJob, RestartJob, CompleteJob). Policies control how
+        Volcano responds to runtime events in distributed workloads.
+      tags:
+        - Configuration
+
+    - term: Plugin
+      definition: >-
+        A Volcano mechanism for framework-specific workload initialization.
+        Plugins like pytorch, tensorflow, spark, and mpi inject environment
+        variables (ranks, master addresses) and init containers into task pods.
+      tags:
+        - Framework Integration
+
+    - term: CNCF Incubating
+      definition: >-
+        Volcano's graduation status in the Cloud Native Computing Foundation
+        (CNCF) project lifecycle, indicating active development and production
+        use but not yet graduated status.
+      tags:
+        - Governance
+
+    - term: HPC
+      definition: >-
+        High-Performance Computing — computationally intensive workloads
+        such as scientific simulations, molecular dynamics, and numerical analysis.
+        One of Volcano's primary target use cases.
+      tags:
+        - Use Case
+
+    - term: Task
+      definition: >-
+        A named group of pod replicas within a Volcano Job, each with an
+        identical pod template. Different tasks in a job can represent different
+        roles (master vs. worker in distributed training).
+      tags:
+        - Job Structure
+
+    - term: Reclaimable Queue
+      definition: >-
+        A Queue configured to allow its allocated resources to be reclaimed by
+        other queues when idle, enabling efficient cluster utilization.
+      tags:
+        - Resource Management
+
+    - term: NUMA Topology Policy
+      definition: >-
+        A task-level configuration controlling how CPU and memory are allocated
+        relative to NUMA (Non-Uniform Memory Access) nodes, important for
+        latency-sensitive HPC workloads.
+      tags:
+        - HPC
+        - Configuration

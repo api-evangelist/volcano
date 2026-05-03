@@ -1,0 +1,95 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://kubernetes-api-server/apis/batch.volcano.sh/v1alpha1/namespaces/ml-workloads/jobs",
+    "headers": {
+      "Authorization": "Bearer <serviceaccount-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "apiVersion": "batch.volcano.sh/v1alpha1",
+      "kind": "Job",
+      "metadata": {
+        "name": "pytorch-training-job",
+        "namespace": "ml-workloads",
+        "labels": {
+          "framework": "pytorch",
+          "team": "ml-platform"
+        }
+      },
+      "spec": {
+        "schedulerName": "volcano",
+        "minAvailable": 3,
+        "queue": "ml-queue",
+        "priorityClassName": "high-priority",
+        "maxRetry": 3,
+        "plugins": {
+          "pytorch": []
+        },
+        "tasks": [
+          {
+            "name": "master",
+            "replicas": 1,
+            "template": {
+              "spec": {
+                "containers": [
+                  {
+                    "name": "master",
+                    "image": "pytorch/pytorch:2.0-cuda11.7",
+                    "resources": {
+                      "requests": {"cpu": "4", "memory": "16Gi", "nvidia.com/gpu": "1"},
+                      "limits": {"cpu": "4", "memory": "16Gi", "nvidia.com/gpu": "1"}
+                    }
+                  }
+                ],
+                "restartPolicy": "Never"
+              }
+            }
+          },
+          {
+            "name": "worker",
+            "replicas": 3,
+            "template": {
+              "spec": {
+                "containers": [
+                  {
+                    "name": "worker",
+                    "image": "pytorch/pytorch:2.0-cuda11.7",
+                    "resources": {
+                      "requests": {"cpu": "4", "memory": "16Gi", "nvidia.com/gpu": "1"},
+                      "limits": {"cpu": "4", "memory": "16Gi", "nvidia.com/gpu": "1"}
+                    }
+                  }
+                ],
+                "restartPolicy": "Never"
+              }
+            }
+          }
+        ],
+        "policies": [
+          {"event": "PodEvicted", "action": "RestartJob"},
+          {"event": "PodFailed", "action": "AbortJob"}
+        ]
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "apiVersion": "batch.volcano.sh/v1alpha1",
+      "kind": "Job",
+      "metadata": {
+        "name": "pytorch-training-job",
+        "namespace": "ml-workloads",
+        "uid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "resourceVersion": "12345",
+        "creationTimestamp": "2026-05-03T10:00:00Z"
+      },
+      "status": {
+        "state": {
+          "phase": "Pending"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "repo": "volcano",
+  "feeds": [
+    {
+      "source": "https://volcano.sh/en/blog/",
+      "feed_url": "https://volcano.sh/en/blog/index.xml",
+      "saved": 10,
+      "title": "BLOGS on Volcano"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:38:04Z"
+}

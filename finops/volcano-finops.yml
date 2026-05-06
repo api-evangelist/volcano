@@ -8,147 +8,92 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Volcano
 providerId: volcano
-publisherName: Volcano
-serviceCategory: API
+publisherName: Cloud Native Computing Foundation
+serviceCategory: Open Source / Kubernetes Scheduler
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Batch Processing
-  - Cloud Native
-  - HPC
-  - Incubating
+  - Open Source
   - Kubernetes
-  - Scheduling
-  - Machine Learning
+  - Batch Scheduling
+  - HPC
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Volcano API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FinOps view of Volcano - the project itself has no licensing or
+  invoice surface (Apache 2.0, CNCF incubating). Costs of running Volcano-
+  scheduled workloads accrue at the underlying compute, GPU, network, and
+  storage layers of the host Kubernetes cluster (cloud or on-prem). The
+  FinOps levers are queue capacity, gang-schedule efficiency, and
+  bin-packing of batch workloads onto the underlying infrastructure.
+sources:
+  - https://volcano.sh
+  - https://volcano.sh/en/docs/
+  - https://github.com/volcano-sh/volcano
+notes: No publisher invoice. FOCUS records for Volcano workloads are produced
+  by the underlying cloud / Kubernetes-platform billing pipeline and tagged by
+  Volcano Queue / Job metadata; there is no Volcano-issued line item.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Open Source
+  billingFrequency: Continuous Settlement
   billingCurrency: USD
   chargeCategories:
     - Usage
-    - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Volcano
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Open Source / Kubernetes Scheduler
   ProviderName: Volcano
-  PublisherName: Volcano
-  InvoiceIssuerName: Volcano
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Cloud Native Computing Foundation
+  InvoiceIssuerName: '(none - open source)'
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
+  - name: scheduled_compute_seconds
+    description: Compute consumed by Volcano-scheduled pods on the underlying
+      cluster, attributed via Volcano Queue and Job labels.
     unit: second
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Volcano Batch Scheduling API
-    baseURL: ''
-    tags:
-      - Batch Scheduling
-      - Gang Scheduling
-      - Queues
-    serviceName: Volcano Batch Scheduling API
-    serviceCategory: API
-  - name: Volcano Queue API
-    baseURL: ''
-    tags:
-      - Batch Scheduling
-      - Kubernetes
-      - Multi-Tenancy
-      - Queues
-      - Resource Management
-    serviceName: Volcano Queue API
-    serviceCategory: API
-  - name: Volcano PodGroup API
-    baseURL: ''
-    tags:
-      - Batch Scheduling
-      - Distributed Computing
-      - Gang Scheduling
-      - Kubernetes
-      - Pod Management
-    serviceName: Volcano PodGroup API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - queue
+      - job
+      - namespace
+      - node_pool
+  - name: gpu_seconds
+    description: GPU time consumed by Volcano-scheduled batch / HPC / ML
+      training workloads.
+    unit: second
+    aggregation: sum
+    dimensions:
+      - queue
+      - gpu_type
+      - job
+  - name: queue_capacity_utilization
+    description: Ratio of allocated to declared Queue capability across CPU,
+      memory, and GPU.
+    unit: ratio
+    aggregation: avg
+    dimensions:
+      - queue
+      - resource
+principles:
+  - name: Visibility
+    description: Volcano emits Prometheus metrics for queue allocation,
+      pending pods, and job state; pair with kube-state-metrics and the
+      cluster's cost-allocation tool (OpenCost, Kubecost) to attribute spend
+      to Queues / Jobs.
+  - name: Allocation
+    description: Allocate underlying compute spend by Volcano Queue and
+      Job labels - typical breakdown is per training run, team, or
+      research project mapped to a Queue weight.
+  - name: Optimization
+    description: Tune Queue weight and capability to bin-pack batch workloads,
+      use gang scheduling to avoid stranded GPU reservations, and right-size
+      PodGroup minMember to reduce idle waiting.
+  - name: Accountability
+    description: Platform / SRE owns the Volcano scheduler configuration;
+      individual Queue owners are accountable for staying within the
+      declared capability and for tagging Jobs for chargeback.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://apievangelist.com

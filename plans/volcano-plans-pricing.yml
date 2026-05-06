@@ -4,146 +4,56 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Volcano
 providerId: volcano
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Batch Processing
-  - Cloud Native
-  - HPC
-  - Incubating
+  - Open Source
   - Kubernetes
-  - Scheduling
-  - Machine Learning
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Batch Scheduling
+  - HPC
+  - CNCF
+description: Volcano is a CNCF incubating, Apache-2.0 licensed batch and HPC
+  scheduler for Kubernetes. There is no commercial pricing or paid plan -
+  the project is run by the community and consumed by deploying the operator
+  into a customer-owned Kubernetes cluster. Costs accrue at the underlying
+  Kubernetes / cloud-infrastructure layer, not as a Volcano subscription.
+sources:
+  - https://volcano.sh
+  - https://volcano.sh/en/docs/
+  - https://github.com/volcano-sh/volcano
+notes: Open-source project (Apache 2.0). No vendor entity, no list price, no
+  paid tier. The "plan" entry is preserved as a single open-source plan so
+  consumers can iterate the structure; commercial support is available only
+  through third-party Kubernetes vendors that ship Volcano in their distribution.
 plans:
-  - id: volcano-free
-    name: Free
+  - id: volcano-open-source
+    name: Open Source (Apache 2.0)
     type: freemium
-    description: Free entry tier for the Volcano API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Volcano is a CNCF incubating project distributed under the
+      Apache 2.0 license. Self-host into any Kubernetes cluster; there is no
+      paid subscription from the project itself.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Volcano Batch Scheduling API
-      - name: Volcano Queue API
-      - name: Volcano PodGroup API
-  - id: volcano-pro
-    name: Professional
-    type: paid
-    description: Production tier for Volcano. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
+      - label: Software License
+        name: software_license
+        type: flat
+        metric: month
         limit: -1
         timeFrame: month
         geo: global
-        domains: []
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Volcano Batch Scheduling API
-      - name: Volcano Queue API
-      - name: Volcano PodGroup API
-  - id: volcano-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Volcano. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Volcano Batch Scheduling API
-      - name: Volcano Queue API
-      - name: Volcano PodGroup API
+      - name: Apache 2.0 License
+      - name: CNCF Incubating Project
+      - name: Job CRD (vcjob)
+      - name: Queue CRD
+      - name: PodGroup CRD
+      - name: Gang Scheduling
+      - name: Fair-Share Scheduling
+      - name: Multi-Dimensional Resource Quotas
+      - name: Community Support (GitHub / Slack)
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://apievangelist.com

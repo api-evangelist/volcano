@@ -4,98 +4,54 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Volcano
 providerId: volcano
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Batch Processing
-  - Cloud Native
-  - HPC
-  - Incubating
+  - Open Source
   - Kubernetes
-  - Scheduling
-  - Machine Learning
   - Rate Limiting
   - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Volcano API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: Volcano does not expose a vendor-side request-rate limit. As a
+  Kubernetes-native scheduler running in the customer's cluster, "limits" in
+  Volcano are workload-level resource quotas - CPU, memory, GPU, and queue
+  capacity - enforced via the Queue CRD and standard Kubernetes ResourceQuota
+  objects. Consumers of the Volcano API interact with the Kubernetes API
+  server, whose rate-limit and admission-controller behavior governs request
+  throttling.
+sources:
+  - https://volcano.sh/en/docs/
+  - https://github.com/volcano-sh/volcano
+notes: No vendor SaaS endpoint exists. Request rate is governed by the
+  Kubernetes API server's client-go QPS / burst settings and any admission
+  controllers in the cluster. Resource fairness is enforced via Volcano Queue
+  capacity and ResourceQuota at the namespace level.
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Volcano Batch Scheduling API
-      - Volcano Queue API
-      - Volcano PodGroup API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Volcano Batch Scheduling API
-      - Volcano Queue API
-      - Volcano PodGroup API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Volcano Batch Scheduling API
-      - Volcano Queue API
-      - Volcano PodGroup API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Volcano Batch Scheduling API
-      - Volcano Queue API
-      - Volcano PodGroup API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Volcano Batch Scheduling API
-      - Volcano Queue API
-      - Volcano PodGroup API
+  - name: Kubernetes API Server (cluster-side)
+    scope: cluster
+    metric: varies
+    limit: see kube-apiserver --max-requests-inflight / --max-mutating-requests-inflight
+    notes: Volcano is consumed via the Kubernetes API; rate enforcement is
+      whatever the cluster's API server is configured with.
+  - name: Volcano Queue Capacity
+    scope: queue
+    metric: varies
+    limit: see Queue CRD spec.capability
+    notes: Multi-dimensional resource cap (CPU, Memory, GPU) per Queue;
+      enforced by Volcano scheduler, not as a request-rate limit.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Kubernetes-Native Throttling
+    description: All client interaction is via kubectl / client-go against the
+      Kubernetes API server. Use the standard client-go QPS / burst tunables
+      and respect 429 responses from the API server.
+  - name: Queue-Based Fairness
+    description: Volcano enforces fairness through Queues with hierarchical
+      resource inheritance, weight, and capability caps rather than per-second
+      request limits.
+  - name: Gang Scheduling Admission
+    description: Jobs are admitted only when the full PodGroup can be scheduled
+      atomically; partial submissions are gated by the scheduler rather than
+      throttled at the API surface.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://apievangelist.com

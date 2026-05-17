@@ -37,7 +37,7 @@ apis:
         url: https://volcano.sh/en/docs/
       - type: Reference
         url: https://volcano.sh/en/docs/vcjob/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://volcano.sh/en/docs/installation/
       - type: OpenAPI
         url: openapi/volcano-job-openapi.yml
@@ -88,7 +88,7 @@ apis:
 common:
   - type: Website
     url: https://volcano.sh/en/
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/volcano-context.jsonld
   - type: JSONSchema
     url: json-schema/volcano-job-schema.json
@@ -102,11 +102,11 @@ common:
     url: capabilities/batch-workload-management.yaml
   - type: Documentation
     url: https://volcano.sh/en/docs/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://volcano.sh/en/docs/installation/
   - type: Blog
     url: https://volcano.sh/en/blog/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/volcano-sh
   - type: GitHubRepository
     url: https://github.com/volcano-sh/volcano

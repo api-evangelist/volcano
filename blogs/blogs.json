@@ -2,12 +2,14 @@
   "repo": "volcano",
   "feeds": [
     {
-      "source": "https://volcano.sh/en/blog/",
-      "feed_url": "https://volcano.sh/en/blog/index.xml",
-      "title": "BLOGS on Volcano",
-      "saved": 25
+      "source": "https://volcano.sh/en/blog/index.xml",
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://volcano.sh/en/docs/installation/",
+      "error": "HTTPError"
     }
   ],
   "post_count": 35,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }

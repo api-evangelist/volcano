@@ -1,0 +1,229 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Volcano Job API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Volcano Jobs in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/namespaces/:namespace/jobs",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Label selector to restrict results."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Field selector to restrict results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginating large result sets."
+              }
+            ]
+          },
+          "docs": "Returns a list of all Volcano Job resources in the specified namespace. Supports filtering by label selector and field selector for targeted queries."
+        },
+        {
+          "info": {
+            "name": "Create a Volcano Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/namespaces/:namespace/jobs",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Volcano Job resource in the specified namespace. The Job spec defines tasks, plugins, lifecycle policies, queue assignment, and minimum available pods for gang scheduling."
+        },
+        {
+          "info": {
+            "name": "Get a Volcano Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/namespaces/:namespace/jobs/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ]
+          },
+          "docs": "Returns the specified Volcano Job resource including its current phase, task statuses, and condition information."
+        },
+        {
+          "info": {
+            "name": "Replace a Volcano Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/namespaces/:namespace/jobs/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the entire Volcano Job resource with the provided specification. The resource version in metadata must match to prevent conflicting updates."
+        },
+        {
+          "info": {
+            "name": "Partially update a Volcano Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/namespaces/:namespace/jobs/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies a partial update to the specified Volcano Job using JSON Merge Patch or Strategic Merge Patch."
+        },
+        {
+          "info": {
+            "name": "Delete a Volcano Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/namespaces/:namespace/jobs/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ]
+          },
+          "docs": "Deletes the specified Volcano Job resource and all pods associated with it."
+        },
+        {
+          "info": {
+            "name": "List Volcano Jobs across all namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/batch.volcano.sh/v1alpha1/jobs",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Label selector to restrict results."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Field selector to restrict results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginating large result sets."
+              }
+            ]
+          },
+          "docs": "Returns all Volcano Job resources across all namespaces in the cluster. Requires cluster-level list permissions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

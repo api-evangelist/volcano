@@ -1,0 +1,1656 @@
+{
+  "item": [
+    {
+      "id": "e2391b7a-9241-4e5a-9870-19230141de19",
+      "name": "Queues",
+      "description": {
+        "content": "Operations for managing Volcano Queue cluster-scoped custom resources. Queues define scheduling namespaces with weight-based fair sharing, resource capacity, and state management for batch workloads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1b94da2b-ffbf-476f-97ce-83c35f728ca9",
+          "name": "List Volcano Queues",
+          "request": {
+            "name": "List Volcano Queues",
+            "description": {
+              "content": "Returns all Volcano Queue resources in the cluster. Queues are cluster-scoped resources and are not namespaced. Each queue defines a scheduling partition with weight, capacity, and state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Label selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Field selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "Continuation token for paginating large result sets."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8223ff38-4ab5-4b16-aa90-ca3bf87324ae",
+              "name": "List of Volcano Queues",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"QueueList\",\n  \"items\": [\n    {\n      \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n      \"kind\": \"Queue\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"1995-05-21T04:17:32.164Z\"\n      },\n      \"spec\": {\n        \"weight\": 1,\n        \"capability\": {\n          \"cpu\": \"16\",\n          \"memory\": \"32Gi\"\n        },\n        \"reclaimable\": true,\n        \"extendClusters\": [\n          {\n            \"name\": \"string\",\n            \"weight\": 6607,\n            \"capacity\": {\n              \"key_0\": \"string\"\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"weight\": 3847,\n            \"capacity\": {\n              \"key_0\": \"string\",\n              \"key_1\": \"string\",\n              \"key_2\": \"string\"\n            }\n          }\n        ],\n        \"guarantee\": {\n          \"resource\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"parent\": \"string\"\n      },\n      \"status\": {\n        \"state\": \"Draining\",\n        \"pending\": 6868,\n        \"running\": 2757,\n        \"unknown\": 5641,\n        \"inqueue\": 174,\n        \"guaranteed\": {\n          \"key_0\": \"string\"\n        },\n        \"allocated\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"reservation\": {\n          \"nodes\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"resource\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"conditions\": [\n          {\n            \"type\": \"string\",\n            \"status\": \"True\",\n            \"reason\": \"string\",\n            \"message\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1977-07-12T22:49:03.246Z\"\n          },\n          {\n            \"type\": \"string\",\n            \"status\": \"Unknown\",\n            \"reason\": \"string\",\n            \"message\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1949-07-08T13:50:10.567Z\"\n          }\n        ]\n      }\n    },\n    {\n      \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n      \"kind\": \"Queue\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"1973-12-27T16:21:13.820Z\"\n      },\n      \"spec\": {\n        \"weight\": 1,\n        \"capability\": {\n          \"cpu\": \"16\",\n          \"memory\": \"32Gi\"\n        },\n        \"reclaimable\": true,\n        \"extendClusters\": [\n          {\n            \"name\": \"string\",\n            \"weight\": 8655,\n            \"capacity\": {\n              \"key_0\": \"string\"\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"weight\": 2974,\n            \"capacity\": {\n              \"key_0\": \"string\",\n              \"key_1\": \"string\"\n            }\n          }\n        ],\n        \"guarantee\": {\n          \"resource\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"parent\": \"string\"\n      },\n      \"status\": {\n        \"state\": \"Draining\",\n        \"pending\": 209,\n        \"running\": 1054,\n        \"unknown\": 4640,\n        \"inqueue\": 953,\n        \"guaranteed\": {\n          \"key_0\": \"string\"\n        },\n        \"allocated\": {\n          \"key_0\": \"string\"\n        },\n        \"reservation\": {\n          \"nodes\": {\n            \"key_0\": \"string\"\n          },\n          \"resource\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        },\n        \"conditions\": [\n          {\n            \"type\": \"string\",\n            \"status\": \"True\",\n            \"reason\": \"string\",\n            \"message\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1948-09-06T01:07:19.786Z\"\n          },\n          {\n            \"type\": \"string\",\n            \"status\": \"False\",\n            \"reason\": \"string\",\n            \"message\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"2010-07-21T23:30:55.008Z\"\n          }\n        ]\n      }\n    }\n  ],\n  \"metadata\": {\n    \"resourceVersion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "924277f0-7099-44f4-874e-0a4dad8fa6e9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26af4272-d9d8-4a77-bf41-361b826e1d05",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f6cab0d-9a95-42e4-a012-21d2d8204287",
+          "name": "Create a Volcano Queue",
+          "request": {
+            "name": "Create a Volcano Queue",
+            "description": {
+              "content": "Creates a new cluster-scoped Volcano Queue resource. The queue spec defines its weight for fair-share scheduling, resource capacity, and whether it allows preemption of lower-priority jobs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "queues"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"resourceVersion\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"creationTimestamp\": \"<dateTime>\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"key_0\": \"<string>\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<integer>\",\n        \"capacity\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<integer>\",\n        \"capacity\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    \"parent\": \"<string>\"\n  },\n  \"status\": {\n    \"state\": \"<string>\",\n    \"pending\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"unknown\": \"<integer>\",\n    \"inqueue\": \"<integer>\",\n    \"guaranteed\": {\n      \"key_0\": \"<string>\"\n    },\n    \"allocated\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"resource\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23be523d-9b42-4c80-9fa0-2e07c4ac97a2",
+              "name": "Queue created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"Queue\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2018-07-06T02:37:16.836Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 1512,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 4487,\n        \"capacity\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Closed\",\n    \"pending\": 1442,\n    \"running\": 8608,\n    \"unknown\": 8790,\n    \"inqueue\": 7671,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2000-08-22T12:58:20.874Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1991-02-27T04:51:54.755Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae416453-adb7-4a87-b4d1-0c65e96bdef2",
+              "name": "Invalid Queue specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"code\": 134\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "019efd40-e970-4d15-867c-42c5e689bc77",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "62b604ef-68d0-4019-ae40-7f3a1b80f87b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b22eeee-302e-453e-9daf-0e4f2d7bdc6b",
+              "name": "Queue with this name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32648871-67cd-4d97-a791-73410d9a7708",
+          "name": "Get a Volcano Queue",
+          "request": {
+            "name": "Get a Volcano Queue",
+            "description": {
+              "content": "Returns the specified Volcano Queue resource including its current state, allocated resources, pending jobs, and condition information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "queues",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Queue resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6baa9b7-767c-4616-ac11-336501e8d17a",
+              "name": "Queue details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"Queue\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2018-07-06T02:37:16.836Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 1512,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 4487,\n        \"capacity\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Closed\",\n    \"pending\": 1442,\n    \"running\": 8608,\n    \"unknown\": 8790,\n    \"inqueue\": 7671,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2000-08-22T12:58:20.874Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1991-02-27T04:51:54.755Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f97cc945-d97f-4d21-9852-4d80b93bb4dc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fa53636-f98b-4df3-8777-86b5e4bee06b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b631787a-a993-42f2-bd22-e2d5a90f4321",
+              "name": "Queue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d50d0742-378f-46ac-a0f7-83546cf91daf",
+          "name": "Replace a Volcano Queue",
+          "request": {
+            "name": "Replace a Volcano Queue",
+            "description": {
+              "content": "Replaces the entire Volcano Queue resource with the provided specification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "queues",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Queue resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"resourceVersion\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"creationTimestamp\": \"<dateTime>\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"key_0\": \"<string>\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<integer>\",\n        \"capacity\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"weight\": \"<integer>\",\n        \"capacity\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    \"parent\": \"<string>\"\n  },\n  \"status\": {\n    \"state\": \"<string>\",\n    \"pending\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"unknown\": \"<integer>\",\n    \"inqueue\": \"<integer>\",\n    \"guaranteed\": {\n      \"key_0\": \"<string>\"\n    },\n    \"allocated\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"resource\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b3299a88-e5d5-4412-8af1-736cb8c7dfc9",
+              "name": "Queue updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"Queue\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2018-07-06T02:37:16.836Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 1512,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 4487,\n        \"capacity\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Closed\",\n    \"pending\": 1442,\n    \"running\": 8608,\n    \"unknown\": 8790,\n    \"inqueue\": 7671,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2000-08-22T12:58:20.874Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1991-02-27T04:51:54.755Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75c0d626-e0ef-4024-ae1d-fbcf66036d11",
+              "name": "Invalid specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee713e71-f54c-4418-bf63-10f3890ebd83",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e074f3ca-66dc-4eb9-aeda-2d6b652fd497",
+              "name": "Queue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1998-12-14T08:39:24.613Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 7141,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 6652,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Open\",\n    \"pending\": 8953,\n    \"running\": 8583,\n    \"unknown\": 8231,\n    \"inqueue\": 288,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2001-08-11T04:15:50.034Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"True\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2011-11-21T17:31:01.728Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e436f67d-3e15-4732-85a7-e5623ee33ea1",
+          "name": "Partially update a Volcano Queue",
+          "request": {
+            "name": "Partially update a Volcano Queue",
+            "description": {
+              "content": "Applies a partial update to the specified Queue using JSON Merge Patch or Strategic Merge Patch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "queues",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Queue resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/merge-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6cbaa29-d0c8-441f-9b0c-428a0239de21",
+              "name": "Queue patched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"Queue\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2018-07-06T02:37:16.836Z\"\n  },\n  \"spec\": {\n    \"weight\": 1,\n    \"capability\": {\n      \"cpu\": \"16\",\n      \"memory\": \"32Gi\"\n    },\n    \"reclaimable\": true,\n    \"extendClusters\": [\n      {\n        \"name\": \"string\",\n        \"weight\": 1512,\n        \"capacity\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"weight\": 4487,\n        \"capacity\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ],\n    \"guarantee\": {\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"parent\": \"string\"\n  },\n  \"status\": {\n    \"state\": \"Closed\",\n    \"pending\": 1442,\n    \"running\": 8608,\n    \"unknown\": 8790,\n    \"inqueue\": 7671,\n    \"guaranteed\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"allocated\": {\n      \"key_0\": \"string\"\n    },\n    \"reservation\": {\n      \"nodes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"resource\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    \"conditions\": [\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2000-08-22T12:58:20.874Z\"\n      },\n      {\n        \"type\": \"string\",\n        \"status\": \"False\",\n        \"reason\": \"string\",\n        \"message\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1991-02-27T04:51:54.755Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41fc5c9e-3822-49cf-9d9f-1e940281ff73",
+              "name": "Invalid patch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d431a827-3f65-46fc-9d0b-5ab93c26dc99",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "049c4215-a477-4a64-ac31-599d69038f88",
+              "name": "Queue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a521822e-76b4-40b6-acc3-9a892263b908",
+          "name": "Delete a Volcano Queue",
+          "request": {
+            "name": "Delete a Volcano Queue",
+            "description": {
+              "content": "Deletes the specified Volcano Queue. Deleting a queue that has pending jobs will cause those jobs to fail to be scheduled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "queues",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the Queue resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d14be69a-c2c4-4f5f-bf20-b89b3936c4c7",
+              "name": "Queue deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4515fc0-cf1c-4b04-8d07-8a3e9efdc7a5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bba6f950-1847-4a83-9e3c-6a981eaca5e3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fefe279e-4561-4fd1-bb9b-56cdc4125ee3",
+              "name": "Queue not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "queues",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the Queue resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubernetes API server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:6443",
+      "key": "kubernetes-api-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{kubernetes-api-server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ab80d23b-4ccb-40c9-90f6-6459fcb60c65",
+    "name": "Volcano Queue API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Volcano Queue API provides Kubernetes CRD endpoints for managing Queue resources that collect PodGroups and apply weight-based fair-share scheduling and resource quotas. Queues are the primary mechanism for multi-tenant resource partitioning and priority-based job admission in Volcano batch scheduling.\n\nContact Support:\n Name: Volcano Community",
+      "type": "text/plain"
+    }
+  }
+}

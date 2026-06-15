@@ -1,0 +1,229 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Volcano PodGroup API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PodGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Volcano List PodGroups in a namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/namespaces/:namespace/podgroups",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Label selector to restrict results."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Field selector to restrict results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginating large result sets."
+              }
+            ]
+          },
+          "docs": "Returns all Volcano PodGroup resources in the specified namespace. PodGroups are typically created automatically by the Volcano controller when a Volcano Job is submitted, but can also be created manually for pods without a Job parent."
+        },
+        {
+          "info": {
+            "name": "Volcano Create a PodGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/namespaces/:namespace/podgroups",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new PodGroup resource in the specified namespace. Pods can reference this PodGroup via the scheduling.volcano.sh/pod-group annotation to join the group and benefit from gang scheduling."
+        },
+        {
+          "info": {
+            "name": "Volcano Get a PodGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/namespaces/:namespace/podgroups/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ]
+          },
+          "docs": "Returns the specified PodGroup resource including its current phase, pod counts, and condition information."
+        },
+        {
+          "info": {
+            "name": "Volcano Replace a PodGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/namespaces/:namespace/podgroups/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the entire PodGroup resource with the provided specification."
+        },
+        {
+          "info": {
+            "name": "Volcano Partially update a PodGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/namespaces/:namespace/podgroups/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies a partial update to the specified PodGroup."
+        },
+        {
+          "info": {
+            "name": "Volcano Delete a PodGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/namespaces/:namespace/podgroups/:name",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "path",
+                "description": "The Kubernetes namespace of the resource."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the resource."
+              }
+            ]
+          },
+          "docs": "Deletes the specified PodGroup resource. Pods in the group that are pending may be removed from scheduling consideration."
+        },
+        {
+          "info": {
+            "name": "Volcano List PodGroups across all namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/podgroups",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Label selector to restrict results."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Field selector to restrict results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginating large result sets."
+              }
+            ]
+          },
+          "docs": "Returns all PodGroup resources across all namespaces in the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

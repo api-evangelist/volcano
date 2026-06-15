@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Volcano Queue API",
+    "version": "1.10.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queues",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Volcano Queues",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/queues",
+            "params": [
+              {
+                "name": "labelSelector",
+                "value": "",
+                "type": "query",
+                "description": "Label selector to restrict results."
+              },
+              {
+                "name": "fieldSelector",
+                "value": "",
+                "type": "query",
+                "description": "Field selector to restrict results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token for paginating large result sets."
+              }
+            ]
+          },
+          "docs": "Returns all Volcano Queue resources in the cluster. Queues are cluster-scoped resources and are not namespaced. Each queue defines a scheduling partition with weight, capacity, and state."
+        },
+        {
+          "info": {
+            "name": "Create a Volcano Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/queues",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new cluster-scoped Volcano Queue resource. The queue spec defines its weight for fair-share scheduling, resource capacity, and whether it allows preemption of lower-priority jobs."
+        },
+        {
+          "info": {
+            "name": "Get a Volcano Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/queues/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Queue resource."
+              }
+            ]
+          },
+          "docs": "Returns the specified Volcano Queue resource including its current state, allocated resources, pending jobs, and condition information."
+        },
+        {
+          "info": {
+            "name": "Replace a Volcano Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/queues/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Queue resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the entire Volcano Queue resource with the provided specification."
+        },
+        {
+          "info": {
+            "name": "Partially update a Volcano Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/queues/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Queue resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies a partial update to the specified Queue using JSON Merge Patch or Strategic Merge Patch."
+        },
+        {
+          "info": {
+            "name": "Delete a Volcano Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{kubernetes-api-server}/apis/scheduling.volcano.sh/v1beta1/queues/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the Queue resource."
+              }
+            ]
+          },
+          "docs": "Deletes the specified Volcano Queue. Deleting a queue that has pending jobs will cause those jobs to fail to be scheduled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

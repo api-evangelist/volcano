@@ -1,0 +1,2234 @@
+{
+  "item": [
+    {
+      "id": "6a346a03-8815-407d-a70f-40cd19793146",
+      "name": "Jobs",
+      "description": {
+        "content": "Operations for managing Volcano Job (vcjob) custom resources. A Volcano Job defines a batch workload with one or more task groups, lifecycle policies, and scheduling requirements.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c82ad1d5-eb77-4baa-ad44-d345c5bf4aa8",
+          "name": "List Volcano Jobs in a namespace",
+          "request": {
+            "name": "List Volcano Jobs in a namespace",
+            "description": {
+              "content": "Returns a list of all Volcano Job resources in the specified namespace. Supports filtering by label selector and field selector for targeted queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "namespaces",
+                ":namespace",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Label selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Field selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "Continuation token for paginating large result sets."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66046bd1-1871-4747-adf9-54dd0e8b1788",
+              "name": "List of Volcano Jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"JobList\",\n  \"items\": [\n    {\n      \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n      \"kind\": \"Job\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"generation\": 9462,\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"1958-08-15T11:58:30.371Z\"\n      },\n      \"spec\": {\n        \"schedulerName\": \"volcano\",\n        \"minAvailable\": 2510,\n        \"tasks\": [\n          {\n            \"name\": \"string\",\n            \"replicas\": 3344,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"best-effort\",\n            \"maxRetry\": 2469,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"replicas\": 1821,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"restricted\",\n            \"maxRetry\": 7211,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodPending\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9472,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"OutOfSync\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6807,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"plugins\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"runningDuration\": \"string\",\n        \"queue\": \"string\",\n        \"priorityClassName\": \"string\",\n        \"maxRetry\": 6763,\n        \"ttlSecondsAfterFinished\": 357\n      },\n      \"status\": {\n        \"state\": {\n          \"phase\": \"Aborting\",\n          \"reason\": \"string\",\n          \"message\": \"string\",\n          \"lastTransitionTime\": \"1970-04-19T11:07:37.941Z\"\n        },\n        \"minAvailable\": 5215,\n        \"version\": 4820,\n        \"retryCount\": 5207,\n        \"runningDuration\": \"string\",\n        \"taskStatusCount\": {\n          \"key_0\": {\n            \"phase\": {\n              \"key_0\": 7702\n            }\n          }\n        },\n        \"conditions\": [\n          {\n            \"status\": \"False\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1982-10-01T13:56:21.702Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"status\": \"Unknown\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1975-11-06T06:52:04.000Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n      \"kind\": \"Job\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"generation\": 6396,\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"2018-05-13T00:07:03.602Z\"\n      },\n      \"spec\": {\n        \"schedulerName\": \"volcano\",\n        \"minAvailable\": 3233,\n        \"tasks\": [\n          {\n            \"name\": \"string\",\n            \"replicas\": 7393,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"best-effort\",\n            \"maxRetry\": 5631,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"replicas\": 7229,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"single-numa-node\",\n            \"maxRetry\": 1422,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"CommandIssued\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 8354,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 2089,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"plugins\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_2\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_3\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"runningDuration\": \"string\",\n        \"queue\": \"string\",\n        \"priorityClassName\": \"string\",\n        \"maxRetry\": 1651,\n        \"ttlSecondsAfterFinished\": 1846\n      },\n      \"status\": {\n        \"state\": {\n          \"phase\": \"Restarting\",\n          \"reason\": \"string\",\n          \"message\": \"string\",\n          \"lastTransitionTime\": \"2022-05-19T14:48:30.369Z\"\n        },\n        \"minAvailable\": 7675,\n        \"version\": 5941,\n        \"retryCount\": 7726,\n        \"runningDuration\": \"string\",\n        \"taskStatusCount\": {\n          \"key_0\": {\n            \"phase\": {\n              \"key_0\": 2955\n            }\n          },\n          \"key_1\": {\n            \"phase\": {\n              \"key_0\": 513\n            }\n          }\n        },\n        \"conditions\": [\n          {\n            \"status\": \"False\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1981-11-12T07:34:10.472Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"status\": \"Unknown\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"2005-02-19T12:27:37.456Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ]\n      }\n    }\n  ],\n  \"metadata\": {\n    \"resourceVersion\": \"string\",\n    \"continue\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36d6f383-8d55-46ec-971d-265bfa7d6974",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "03c610b4-1423-4de4-bdf4-c0b594765871",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e60e84f2-4f3b-4b8d-b38c-a2e0e2fd4c06",
+          "name": "Create a Volcano Job",
+          "request": {
+            "name": "Create a Volcano Job",
+            "description": {
+              "content": "Creates a new Volcano Job resource in the specified namespace. The Job spec defines tasks, plugins, lifecycle policies, queue assignment, and minimum available pods for gang scheduling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "namespaces",
+                ":namespace",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<long>\",\n    \"uid\": \"<string>\",\n    \"creationTimestamp\": \"<dateTime>\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": \"<integer>\",\n    \"volumes\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"tasks\": [\n      {\n        \"name\": \"<string>\",\n        \"replicas\": \"<integer>\",\n        \"template\": \"<object>\",\n        \"policies\": [\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          },\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          }\n        ],\n        \"topologyPolicy\": \"<string>\",\n        \"maxRetry\": \"<integer>\",\n        \"dependsOn\": {\n          \"name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iteration\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"replicas\": \"<integer>\",\n        \"template\": \"<object>\",\n        \"policies\": [\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          },\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          }\n        ],\n        \"topologyPolicy\": \"<string>\",\n        \"maxRetry\": \"<integer>\",\n        \"dependsOn\": {\n          \"name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iteration\": \"<string>\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"<string>\",\n        \"event\": \"<string>\",\n        \"events\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"exitCode\": \"<integer>\",\n        \"timeout\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\",\n        \"event\": \"<string>\",\n        \"events\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"exitCode\": \"<integer>\",\n        \"timeout\": \"<string>\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"runningDuration\": \"<string>\",\n    \"queue\": \"<string>\",\n    \"priorityClassName\": \"<string>\",\n    \"maxRetry\": \"<integer>\",\n    \"ttlSecondsAfterFinished\": \"<integer>\"\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"message\": \"<string>\",\n      \"lastTransitionTime\": \"<dateTime>\"\n    },\n    \"minAvailable\": \"<integer>\",\n    \"version\": \"<integer>\",\n    \"retryCount\": \"<integer>\",\n    \"runningDuration\": \"<string>\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": \"<integer>\"\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"<string>\",\n        \"type\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      {\n        \"status\": \"<string>\",\n        \"type\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d6c223f2-438f-4fe9-aeb6-eb45d243c5c8",
+              "name": "Job created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n  \"kind\": \"Job\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 8589,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1951-09-13T04:10:18.939Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 8192,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 3415,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodEvicted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 3984,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"RestartTask\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2908,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 2571,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"SyncJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5679,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2050,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"PodPending\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 506,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"ResumeJob\",\n        \"event\": \"PodSucceeded\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1708,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 5860,\n    \"ttlSecondsAfterFinished\": 9890\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminating\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"1963-02-24T12:50:32.614Z\"\n    },\n    \"minAvailable\": 8300,\n    \"version\": 847,\n    \"retryCount\": 457,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 5678\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1987-09-25T02:55:47.101Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1956-05-13T14:13:26.032Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b20dd515-e76f-47d8-825b-0526b6e4a59a",
+              "name": "Invalid Job specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"code\": 8149\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4c9f4a4-83c3-476c-9ae1-2b1dac58afb6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3553db09-fcb5-491d-a407-76960211e0c8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a53e00c2-2aeb-4498-a06b-937af4ca457e",
+              "name": "Job with this name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3a24c13-5473-4b39-bc0a-3023ca888f62",
+          "name": "Get a Volcano Job",
+          "request": {
+            "name": "Get a Volcano Job",
+            "description": {
+              "content": "Returns the specified Volcano Job resource including its current phase, task statuses, and condition information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "namespaces",
+                ":namespace",
+                "jobs",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "099d719b-9b55-44cb-89fa-30bc559ce957",
+              "name": "Volcano Job details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n  \"kind\": \"Job\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 8589,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1951-09-13T04:10:18.939Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 8192,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 3415,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodEvicted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 3984,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"RestartTask\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2908,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 2571,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"SyncJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5679,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2050,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"PodPending\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 506,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"ResumeJob\",\n        \"event\": \"PodSucceeded\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1708,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 5860,\n    \"ttlSecondsAfterFinished\": 9890\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminating\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"1963-02-24T12:50:32.614Z\"\n    },\n    \"minAvailable\": 8300,\n    \"version\": 847,\n    \"retryCount\": 457,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 5678\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1987-09-25T02:55:47.101Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1956-05-13T14:13:26.032Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63c822a8-afc9-4710-ac82-d13b0fe9f47c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f58a925e-b74b-406d-9622-0940a33bfca9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5953ec8-029c-4a4a-8b10-8b399f480ac9",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c66799cc-c709-417c-939c-9d928ea83bc6",
+          "name": "Replace a Volcano Job",
+          "request": {
+            "name": "Replace a Volcano Job",
+            "description": {
+              "content": "Replaces the entire Volcano Job resource with the provided specification. The resource version in metadata must match to prevent conflicting updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "namespaces",
+                ":namespace",
+                "jobs",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"resourceVersion\": \"<string>\",\n    \"generation\": \"<long>\",\n    \"uid\": \"<string>\",\n    \"creationTimestamp\": \"<dateTime>\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": \"<integer>\",\n    \"volumes\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"tasks\": [\n      {\n        \"name\": \"<string>\",\n        \"replicas\": \"<integer>\",\n        \"template\": \"<object>\",\n        \"policies\": [\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          },\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          }\n        ],\n        \"topologyPolicy\": \"<string>\",\n        \"maxRetry\": \"<integer>\",\n        \"dependsOn\": {\n          \"name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iteration\": \"<string>\"\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"replicas\": \"<integer>\",\n        \"template\": \"<object>\",\n        \"policies\": [\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          },\n          {\n            \"action\": \"<string>\",\n            \"event\": \"<string>\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": \"<integer>\",\n            \"timeout\": \"<string>\"\n          }\n        ],\n        \"topologyPolicy\": \"<string>\",\n        \"maxRetry\": \"<integer>\",\n        \"dependsOn\": {\n          \"name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iteration\": \"<string>\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"<string>\",\n        \"event\": \"<string>\",\n        \"events\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"exitCode\": \"<integer>\",\n        \"timeout\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\",\n        \"event\": \"<string>\",\n        \"events\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"exitCode\": \"<integer>\",\n        \"timeout\": \"<string>\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"runningDuration\": \"<string>\",\n    \"queue\": \"<string>\",\n    \"priorityClassName\": \"<string>\",\n    \"maxRetry\": \"<integer>\",\n    \"ttlSecondsAfterFinished\": \"<integer>\"\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"message\": \"<string>\",\n      \"lastTransitionTime\": \"<dateTime>\"\n    },\n    \"minAvailable\": \"<integer>\",\n    \"version\": \"<integer>\",\n    \"retryCount\": \"<integer>\",\n    \"runningDuration\": \"<string>\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": \"<integer>\"\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": \"<integer>\",\n          \"key_1\": \"<integer>\"\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"<string>\",\n        \"type\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      {\n        \"status\": \"<string>\",\n        \"type\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53dc623d-978c-4f35-9d8d-ef0d8533076d",
+              "name": "Job updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n  \"kind\": \"Job\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 8589,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1951-09-13T04:10:18.939Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 8192,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 3415,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodEvicted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 3984,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"RestartTask\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2908,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 2571,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"SyncJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5679,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2050,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"PodPending\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 506,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"ResumeJob\",\n        \"event\": \"PodSucceeded\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1708,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 5860,\n    \"ttlSecondsAfterFinished\": 9890\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminating\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"1963-02-24T12:50:32.614Z\"\n    },\n    \"minAvailable\": 8300,\n    \"version\": 847,\n    \"retryCount\": 457,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 5678\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1987-09-25T02:55:47.101Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1956-05-13T14:13:26.032Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95082e25-db82-47d6-a101-a92b2748c7d1",
+              "name": "Invalid specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2de2ea0d-06e7-46ce-860e-ce0336f4b6de",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d958f79-e1d3-4154-83ee-5356b25f6114",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "04876ebb-8f00-4a4e-824e-a1f0750ece9b",
+              "name": "Conflict - resource version mismatch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 4319,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2001-05-20T04:25:31.327Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 4556,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 8456,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"TerminateJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6205,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"AbortJob\",\n            \"event\": \"TaskCompleted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9084,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 8401,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 9574,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9603,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5259,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"restricted\",\n        \"maxRetry\": 4616,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"JobUpdated\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 4184,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"TerminateJob\",\n        \"event\": \"PodFailed\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1707,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 7019,\n    \"ttlSecondsAfterFinished\": 714\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminated\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"2021-09-06T08:20:03.181Z\"\n    },\n    \"minAvailable\": 9180,\n    \"version\": 234,\n    \"retryCount\": 7131,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 6153,\n          \"key_1\": 1476,\n          \"key_2\": 7702\n        }\n      },\n      \"key_1\": {\n        \"phase\": {\n          \"key_0\": 8128\n        }\n      },\n      \"key_2\": {\n        \"phase\": {\n          \"key_0\": 393,\n          \"key_1\": 3259\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1952-06-21T16:53:04.910Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"Unknown\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1970-11-29T21:18:29.709Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d49a7e7-d410-4eae-b2d4-3eed4147008f",
+          "name": "Partially update a Volcano Job",
+          "request": {
+            "name": "Partially update a Volcano Job",
+            "description": {
+              "content": "Applies a partial update to the specified Volcano Job using JSON Merge Patch or Strategic Merge Patch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "namespaces",
+                ":namespace",
+                "jobs",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/merge-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9fa0ea2b-3823-4ae2-bce2-c9f5cddfccbe",
+              "name": "Job patched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n  \"kind\": \"Job\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"generation\": 8589,\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1951-09-13T04:10:18.939Z\"\n  },\n  \"spec\": {\n    \"schedulerName\": \"volcano\",\n    \"minAvailable\": 8192,\n    \"tasks\": [\n      {\n        \"name\": \"string\",\n        \"replicas\": 3415,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodEvicted\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 3984,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"RestartTask\",\n            \"event\": \"PodFailed\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2908,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"replicas\": 2571,\n        \"template\": {},\n        \"policies\": [\n          {\n            \"action\": \"CompleteJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9621,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"SyncJob\",\n            \"event\": \"JobUnknown\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 5679,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"topologyPolicy\": \"none\",\n        \"maxRetry\": 2050,\n        \"dependsOn\": {\n          \"name\": [\n            \"string\",\n            \"string\"\n          ],\n          \"iteration\": \"string\"\n        }\n      }\n    ],\n    \"policies\": [\n      {\n        \"action\": \"CompleteJob\",\n        \"event\": \"PodPending\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 506,\n        \"timeout\": \"string\"\n      },\n      {\n        \"action\": \"ResumeJob\",\n        \"event\": \"PodSucceeded\",\n        \"events\": [\n          \"string\",\n          \"string\"\n        ],\n        \"exitCode\": 1708,\n        \"timeout\": \"string\"\n      }\n    ],\n    \"plugins\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"runningDuration\": \"string\",\n    \"queue\": \"string\",\n    \"priorityClassName\": \"string\",\n    \"maxRetry\": 5860,\n    \"ttlSecondsAfterFinished\": 9890\n  },\n  \"status\": {\n    \"state\": {\n      \"phase\": \"Terminating\",\n      \"reason\": \"string\",\n      \"message\": \"string\",\n      \"lastTransitionTime\": \"1963-02-24T12:50:32.614Z\"\n    },\n    \"minAvailable\": 8300,\n    \"version\": 847,\n    \"retryCount\": 457,\n    \"runningDuration\": \"string\",\n    \"taskStatusCount\": {\n      \"key_0\": {\n        \"phase\": {\n          \"key_0\": 5678\n        }\n      }\n    },\n    \"conditions\": [\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1987-09-25T02:55:47.101Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"status\": \"True\",\n        \"type\": \"string\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1956-05-13T14:13:26.032Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2968cfad-09b2-47d6-8993-3400cf8bf5b0",
+              "name": "Invalid patch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "953755be-e37a-4c80-bdf0-f8950ea1dae8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "604e148b-74f0-48f5-8059-7b4b7e001562",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "834004f8-4052-4c04-8ce1-49c4e4e85a73",
+          "name": "Delete a Volcano Job",
+          "request": {
+            "name": "Delete a Volcano Job",
+            "description": {
+              "content": "Deletes the specified Volcano Job resource and all pods associated with it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "namespaces",
+                ":namespace",
+                "jobs",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6891710-234e-4ebf-ba45-d45864e8489f",
+              "name": "Job deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26a67c02-bfbf-4dbd-907e-3eecee43db2e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63a9a15c-f8f0-4e1a-ba7e-2b23b7a3cbed",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e06e3ab5-389e-462b-933e-d926867a1753",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "namespaces",
+                    ":namespace",
+                    "jobs",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51ad55ee-1519-439f-9a74-5d1aa846bf98",
+          "name": "List Volcano Jobs across all namespaces",
+          "request": {
+            "name": "List Volcano Jobs across all namespaces",
+            "description": {
+              "content": "Returns all Volcano Job resources across all namespaces in the cluster. Requires cluster-level list permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "batch.volcano.sh",
+                "v1alpha1",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Label selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Field selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "Continuation token for paginating large result sets."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d86806e-5438-472e-8082-a8949beb721e",
+              "name": "All Volcano Jobs in the cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"JobList\",\n  \"items\": [\n    {\n      \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n      \"kind\": \"Job\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"generation\": 9462,\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"1958-08-15T11:58:30.371Z\"\n      },\n      \"spec\": {\n        \"schedulerName\": \"volcano\",\n        \"minAvailable\": 2510,\n        \"tasks\": [\n          {\n            \"name\": \"string\",\n            \"replicas\": 3344,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"best-effort\",\n            \"maxRetry\": 2469,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"replicas\": 1821,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"restricted\",\n            \"maxRetry\": 7211,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodPending\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 9472,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"EnqueueJob\",\n            \"event\": \"OutOfSync\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 6807,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"plugins\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"runningDuration\": \"string\",\n        \"queue\": \"string\",\n        \"priorityClassName\": \"string\",\n        \"maxRetry\": 6763,\n        \"ttlSecondsAfterFinished\": 357\n      },\n      \"status\": {\n        \"state\": {\n          \"phase\": \"Aborting\",\n          \"reason\": \"string\",\n          \"message\": \"string\",\n          \"lastTransitionTime\": \"1970-04-19T11:07:37.941Z\"\n        },\n        \"minAvailable\": 5215,\n        \"version\": 4820,\n        \"retryCount\": 5207,\n        \"runningDuration\": \"string\",\n        \"taskStatusCount\": {\n          \"key_0\": {\n            \"phase\": {\n              \"key_0\": 7702\n            }\n          }\n        },\n        \"conditions\": [\n          {\n            \"status\": \"False\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1982-10-01T13:56:21.702Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"status\": \"Unknown\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1975-11-06T06:52:04.000Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"apiVersion\": \"batch.volcano.sh/v1alpha1\",\n      \"kind\": \"Job\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"generation\": 6396,\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"2018-05-13T00:07:03.602Z\"\n      },\n      \"spec\": {\n        \"schedulerName\": \"volcano\",\n        \"minAvailable\": 3233,\n        \"tasks\": [\n          {\n            \"name\": \"string\",\n            \"replicas\": 7393,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"best-effort\",\n            \"maxRetry\": 5631,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"replicas\": 7229,\n            \"template\": {},\n            \"policies\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"topologyPolicy\": \"single-numa-node\",\n            \"maxRetry\": 1422,\n            \"dependsOn\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"iteration\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"policies\": [\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"CommandIssued\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 8354,\n            \"timeout\": \"string\"\n          },\n          {\n            \"action\": \"ResumeJob\",\n            \"event\": \"PodSucceeded\",\n            \"events\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"exitCode\": 2089,\n            \"timeout\": \"string\"\n          }\n        ],\n        \"plugins\": {\n          \"key_0\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_1\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_2\": [\n            \"string\",\n            \"string\"\n          ],\n          \"key_3\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"runningDuration\": \"string\",\n        \"queue\": \"string\",\n        \"priorityClassName\": \"string\",\n        \"maxRetry\": 1651,\n        \"ttlSecondsAfterFinished\": 1846\n      },\n      \"status\": {\n        \"state\": {\n          \"phase\": \"Restarting\",\n          \"reason\": \"string\",\n          \"message\": \"string\",\n          \"lastTransitionTime\": \"2022-05-19T14:48:30.369Z\"\n        },\n        \"minAvailable\": 7675,\n        \"version\": 5941,\n        \"retryCount\": 7726,\n        \"runningDuration\": \"string\",\n        \"taskStatusCount\": {\n          \"key_0\": {\n            \"phase\": {\n              \"key_0\": 2955\n            }\n          },\n          \"key_1\": {\n            \"phase\": {\n              \"key_0\": 513\n            }\n          }\n        },\n        \"conditions\": [\n          {\n            \"status\": \"False\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1981-11-12T07:34:10.472Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"status\": \"Unknown\",\n            \"type\": \"string\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"2005-02-19T12:27:37.456Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ]\n      }\n    }\n  ],\n  \"metadata\": {\n    \"resourceVersion\": \"string\",\n    \"continue\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c3b24cc-266c-48b8-99f4-31a6311d2ea3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "119c9c92-e87d-44cf-a212-5843733144bb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "batch.volcano.sh",
+                    "v1alpha1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubernetes API server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:6443",
+      "key": "kubernetes-api-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{kubernetes-api-server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aae596fa-7fbc-4405-a60a-66860f509a7b",
+    "name": "Volcano Job API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Volcano Job API provides Kubernetes CRD endpoints for defining and managing batch workloads using Volcano's Job resource (vcjob). Volcano Jobs support multiple task types, lifecycle policies, gang scheduling, and integration with frameworks including TensorFlow, PyTorch, Spark, and MPI. All operations go through the Kubernetes API server.\n\nContact Support:\n Name: Volcano Community",
+      "type": "text/plain"
+    }
+  }
+}

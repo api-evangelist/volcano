@@ -6,7 +6,7 @@ description: >-
   lifecycle management for batch workloads such as machine learning training, big data processing, and scientific
   computing. Volcano extends Kubernetes with three CRDs: Job (vcjob), Queue, and PodGroup.
 url: https://volcano.sh
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Batch Processing
   - Cloud Native

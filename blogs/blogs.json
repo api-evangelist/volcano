@@ -2,8 +2,11 @@
   "repo": "volcano",
   "feeds": [
     {
-      "source": "https://volcano.sh/en/blog/index.xml",
-      "error": "HTTPError"
+      "source": "https://volcano.sh/en/blog/",
+      "feed_url": "https://volcano.sh/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     },
     {
       "source": "https://volcano.sh/en/docs/installation/",
@@ -13,6 +16,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 35,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 36,
+  "fetched": "2026-06-27T12:03:07Z"
 }

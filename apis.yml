@@ -80,6 +80,8 @@ apis:
       - Kubernetes
       - Pod Management
 common:
+  - type: DomainSecurity
+    url: security/volcano-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/philips-volcano
   - type: Website

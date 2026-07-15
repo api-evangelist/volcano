@@ -80,6 +80,8 @@ apis:
       - Kubernetes
       - Pod Management
 common:
+  - type: AgenticAccess
+    url: agentic-access/volcano-agentic-access.yml
   - type: DomainSecurity
     url: security/volcano-domain-security.yml
   - type: LinkedIn

@@ -6,7 +6,19 @@ description: >-
   lifecycle management for batch workloads such as machine learning training, big data processing, and scientific
   computing. Volcano extends Kubernetes with three CRDs: Job (vcjob), Queue, and PodGroup.
 url: https://volcano.sh
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/volcano.png
 tags:
   - Batch Processing
   - Cloud Native
@@ -20,65 +32,75 @@ modified: '2026-05-19'
 specificationVersion: '0.19'
 type: Index
 apis:
-  - aid: volcano:volcano-api
-    name: Volcano Batch Scheduling API
-    description: >-
-      Volcano extends Kubernetes with CRDs for batch workload management. The Job resource defines batch workloads with
-      multiple task types and lifecycle policies. Queue resources manage job scheduling with weight-based fair sharing
-      and resource quotas. Volcano supports gang scheduling ensuring all pods in a group are scheduled together, and
-      integrates with frameworks like TensorFlow, PyTorch, Spark, and MPI.
-    humanURL: https://volcano.sh/en/docs/
-    properties:
-      - type: Documentation
-        url: https://volcano.sh/en/docs/
-      - type: Reference
-        url: https://volcano.sh/en/docs/vcjob/
-      - type: GettingStarted
-        url: https://volcano.sh/en/docs/installation/
-      - type: OpenAPI
-        url: openapi/volcano-job-openapi.yml
-      - type: JSONSchema
-        url: json-schema/volcano-job-schema.json
-    tags:
-      - Batch Scheduling
-      - Gang Scheduling
-      - Queues
-  - aid: volcano:volcano-queue-api
-    name: Volcano Queue API
-    description: >-
-      Kubernetes CRD for defining and managing job queues in Volcano. Queues collect PodGroups and support weight-based
-      fair-share scheduling and resource quotas, providing the primary mechanism for multi-tenant resource partitioning
-      and priority-based job admission.
-    humanURL: https://volcano.sh/en/docs/v1-10-0/queue/
-    properties:
-      - type: Documentation
-        url: https://volcano.sh/en/docs/v1-10-0/queue/
-      - type: OpenAPI
-        url: openapi/volcano-queue-openapi.yml
-    tags:
-      - Batch Scheduling
-      - Kubernetes
-      - Multi-Tenancy
-      - Queues
-      - Resource Management
-  - aid: volcano:volcano-podgroup-api
-    name: Volcano PodGroup API
-    description: >-
-      Kubernetes CRD that represents a group of pods with strong association, used as the unit of gang scheduling in
-      Volcano. PodGroups define the minimum number of pods that must be scheduled together, enabling all-or-nothing
-      scheduling semantics for distributed training and computing workloads.
-    humanURL: https://volcano.sh/en/docs/podgroup/
-    properties:
-      - type: Documentation
-        url: https://volcano.sh/en/docs/podgroup/
-      - type: OpenAPI
-        url: openapi/volcano-podgroup-openapi.yml
-    tags:
-      - Batch Scheduling
-      - Distributed Computing
-      - Gang Scheduling
-      - Kubernetes
-      - Pod Management
+- aid: volcano:volcano-jobs-api
+  name: Volcano Jobs API
+  description: >-
+    Operations for managing Volcano Job (vcjob) custom resources. A Volcano Job defines a batch workload
+    with one or more task groups, lifecycle policies, and scheduling requirements.
+  humanURL: https://volcano.sh/en/docs/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/volcano-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://volcano.sh/en/docs/
+  - type: Reference
+    url: https://volcano.sh/en/docs/vcjob/
+  - type: GettingStarted
+    url: https://volcano.sh/en/docs/installation/
+  - type: JSONSchema
+    url: json-schema/volcano-job-schema.json
+  - type: Documentation
+    url: https://volcano.sh/en/docs/v1-10-0/queue/
+  - type: Documentation
+    url: https://volcano.sh/en/docs/podgroup/
+- aid: volcano:volcano-podgroups-api
+  name: Volcano PodGroups API
+  description: >-
+    Operations for managing Volcano PodGroup custom resources. PodGroups define gang scheduling units
+    with minimum availability requirements and queue assignment.
+  humanURL: https://volcano.sh/en/docs/
+  tags:
+  - PodGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/volcano-podgroups-api-openapi.yml
+  - type: Documentation
+    url: https://volcano.sh/en/docs/
+  - type: Reference
+    url: https://volcano.sh/en/docs/vcjob/
+  - type: GettingStarted
+    url: https://volcano.sh/en/docs/installation/
+  - type: JSONSchema
+    url: json-schema/volcano-job-schema.json
+  - type: Documentation
+    url: https://volcano.sh/en/docs/v1-10-0/queue/
+  - type: Documentation
+    url: https://volcano.sh/en/docs/podgroup/
+- aid: volcano:volcano-queues-api
+  name: Volcano Queues API
+  description: >-
+    Operations for managing Volcano Queue cluster-scoped custom resources. Queues define scheduling namespaces
+    with weight-based fair sharing, resource capacity, and state management for batch workloads.
+  humanURL: https://volcano.sh/en/docs/
+  tags:
+  - Queues
+  properties:
+  - type: OpenAPI
+    url: openapi/volcano-queues-api-openapi.yml
+  - type: Documentation
+    url: https://volcano.sh/en/docs/
+  - type: Reference
+    url: https://volcano.sh/en/docs/vcjob/
+  - type: GettingStarted
+    url: https://volcano.sh/en/docs/installation/
+  - type: JSONSchema
+    url: json-schema/volcano-job-schema.json
+  - type: Documentation
+    url: https://volcano.sh/en/docs/v1-10-0/queue/
+  - type: Documentation
+    url: https://volcano.sh/en/docs/podgroup/
 common:
   - type: AgenticAccess
     url: agentic-access/volcano-agentic-access.yml

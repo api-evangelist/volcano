@@ -1,0 +1,18 @@
+{
+  "provider": "volcano",
+  "sources": [
+    "volcano-jobs-api-openapi.yml",
+    "volcano-podgroups-api-openapi.yml",
+    "volcano-queues-api-openapi.yml"
+  ],
+  "outputs": [
+    "volcano-jobs-api-openapi.yml",
+    "volcano-podgroups-api-openapi.yml",
+    "volcano-queues-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

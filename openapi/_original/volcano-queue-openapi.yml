@@ -1,0 +1,461 @@
+openapi: 3.1.0
+info:
+  title: Volcano Queue API
+  description: >-
+    The Volcano Queue API provides Kubernetes CRD endpoints for managing Queue
+    resources that collect PodGroups and apply weight-based fair-share scheduling
+    and resource quotas. Queues are the primary mechanism for multi-tenant resource
+    partitioning and priority-based job admission in Volcano batch scheduling.
+  version: '1.10.0'
+  contact:
+    name: Volcano Community
+    url: https://volcano.sh/en/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Volcano Queue Documentation
+  url: https://volcano.sh/en/docs/v1-10-0/queue/
+servers:
+  - url: https://{kubernetes-api-server}
+    description: Kubernetes API server
+    variables:
+      kubernetes-api-server:
+        default: localhost:6443
+        description: Address of the Kubernetes API server
+tags:
+  - name: Queues
+    description: >-
+      Operations for managing Volcano Queue cluster-scoped custom resources.
+      Queues define scheduling namespaces with weight-based fair sharing,
+      resource capacity, and state management for batch workloads.
+paths:
+  /apis/scheduling.volcano.sh/v1beta1/queues:
+    get:
+      operationId: listQueues
+      summary: List Volcano Queues
+      description: >-
+        Returns all Volcano Queue resources in the cluster. Queues are
+        cluster-scoped resources and are not namespaced. Each queue defines
+        a scheduling partition with weight, capacity, and state.
+      tags:
+        - Queues
+      parameters:
+        - $ref: '#/components/parameters/labelSelector'
+        - $ref: '#/components/parameters/fieldSelector'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/continueToken'
+      responses:
+        '200':
+          description: List of Volcano Queues
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueList'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: createQueue
+      summary: Create a Volcano Queue
+      description: >-
+        Creates a new cluster-scoped Volcano Queue resource. The queue spec
+        defines its weight for fair-share scheduling, resource capacity, and
+        whether it allows preemption of lower-priority jobs.
+      tags:
+        - Queues
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Queue'
+      responses:
+        '201':
+          description: Queue created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '400':
+          description: Invalid Queue specification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Queue with this name already exists
+  /apis/scheduling.volcano.sh/v1beta1/queues/{name}:
+    get:
+      operationId: readQueue
+      summary: Get a Volcano Queue
+      description: >-
+        Returns the specified Volcano Queue resource including its current state,
+        allocated resources, pending jobs, and condition information.
+      tags:
+        - Queues
+      parameters:
+        - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          description: Queue details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Queue not found
+    put:
+      operationId: replaceQueue
+      summary: Replace a Volcano Queue
+      description: >-
+        Replaces the entire Volcano Queue resource with the provided specification.
+      tags:
+        - Queues
+      parameters:
+        - $ref: '#/components/parameters/name'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Queue'
+      responses:
+        '200':
+          description: Queue updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '400':
+          description: Invalid specification
+        '401':
+          description: Unauthorized
+        '404':
+          description: Queue not found
+    patch:
+      operationId: patchQueue
+      summary: Partially update a Volcano Queue
+      description: >-
+        Applies a partial update to the specified Queue using JSON Merge Patch
+        or Strategic Merge Patch.
+      tags:
+        - Queues
+      parameters:
+        - $ref: '#/components/parameters/name'
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Queue patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Queue'
+        '400':
+          description: Invalid patch
+        '401':
+          description: Unauthorized
+        '404':
+          description: Queue not found
+    delete:
+      operationId: deleteQueue
+      summary: Delete a Volcano Queue
+      description: >-
+        Deletes the specified Volcano Queue. Deleting a queue that has pending
+        jobs will cause those jobs to fail to be scheduled.
+      tags:
+        - Queues
+      parameters:
+        - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          description: Queue deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Queue not found
+components:
+  parameters:
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the Queue resource.
+      schema:
+        type: string
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
+  schemas:
+    Queue:
+      type: object
+      description: >-
+        A Volcano Queue cluster-scoped custom resource defining a scheduling
+        partition with weight-based fair sharing, resource quotas, and job
+        admission controls.
+      required:
+        - apiVersion
+        - kind
+        - metadata
+        - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+            - scheduling.volcano.sh/v1beta1
+        kind:
+          type: string
+          enum:
+            - Queue
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/QueueSpec'
+        status:
+          $ref: '#/components/schemas/QueueStatus'
+    QueueSpec:
+      type: object
+      description: Specification of a Volcano Queue.
+      properties:
+        weight:
+          type: integer
+          description: >-
+            Relative weight of this queue for fair-share scheduling. Higher
+            weight queues receive proportionally more resources when there is
+            resource contention. Defaults to 1.
+          minimum: 1
+          default: 1
+        capability:
+          type: object
+          description: >-
+            Maximum resource allocation for this queue. Jobs submitted to this
+            queue cannot collectively use more resources than specified here.
+            Uses Kubernetes resource quantity format.
+          additionalProperties:
+            type: string
+          example:
+            cpu: "16"
+            memory: "32Gi"
+        reclaimable:
+          type: boolean
+          description: >-
+            If true, resources allocated to idle jobs in this queue can be
+            reclaimed by other queues that need them. Enables opportunistic
+            resource sharing.
+          default: true
+        extendClusters:
+          type: array
+          description: >-
+            List of extended cluster references for multi-cluster scheduling.
+            Allows jobs in this queue to be dispatched across cluster boundaries.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the remote cluster.
+              weight:
+                type: integer
+                description: Relative scheduling weight for this remote cluster.
+              capacity:
+                type: object
+                description: Resource capacity of the remote cluster.
+                additionalProperties:
+                  type: string
+        guarantee:
+          type: object
+          description: >-
+            Guaranteed minimum resource allocation for this queue. The scheduler
+            ensures at least this amount of resources is always available to jobs
+            in this queue regardless of other queue pressure.
+          properties:
+            resource:
+              type: object
+              additionalProperties:
+                type: string
+              description: >-
+                Minimum guaranteed resources using Kubernetes resource quantity
+                format, e.g. {"cpu": "4", "memory": "8Gi"}.
+        parent:
+          type: string
+          description: >-
+            Name of the parent queue for hierarchical queue structures. Enables
+            nested queue trees for complex multi-tenant scheduling.
+    QueueStatus:
+      type: object
+      description: >-
+        Observed status of a Volcano Queue including resource usage, job counts,
+        and operational state.
+      properties:
+        state:
+          type: string
+          description: Current operational state of the queue.
+          enum:
+            - Open
+            - Closed
+            - Draining
+            - Unknown
+        pending:
+          type: integer
+          format: int32
+          description: Number of PodGroups in the Pending phase in this queue.
+        running:
+          type: integer
+          format: int32
+          description: Number of PodGroups in the Running phase in this queue.
+        unknown:
+          type: integer
+          format: int32
+          description: Number of PodGroups in the Unknown phase in this queue.
+        inqueue:
+          type: integer
+          format: int32
+          description: Number of PodGroups queued and waiting for resources.
+        guaranteed:
+          type: object
+          description: Guaranteed resource allocation for this queue.
+          additionalProperties:
+            type: string
+        allocated:
+          type: object
+          description: Currently allocated resources across all running jobs in this queue.
+          additionalProperties:
+            type: string
+        reservation:
+          type: object
+          description: Reserved resource allocation for this queue.
+          properties:
+            nodes:
+              type: object
+              additionalProperties:
+                type: string
+            resource:
+              type: object
+              additionalProperties:
+                type: string
+        conditions:
+          type: array
+          description: Current conditions of the queue.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              status:
+                type: string
+                enum:
+                  - 'True'
+                  - 'False'
+                  - Unknown
+              reason:
+                type: string
+              message:
+                type: string
+              transitionID:
+                type: string
+              lastTransitionTime:
+                type: string
+                format: date-time
+    QueueList:
+      type: object
+      description: A list of Volcano Queue resources.
+      required:
+        - apiVersion
+        - kind
+        - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          enum:
+            - QueueList
+        metadata:
+          type: object
+          properties:
+            resourceVersion:
+              type: string
+        items:
+          type: array
+          description: List of Queue resources.
+          items:
+            $ref: '#/components/schemas/Queue'
+    ObjectMeta:
+      type: object
+      description: Standard Kubernetes object metadata.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the queue, unique cluster-wide.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Labels for organizing and selecting the queue.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Non-identifying metadata for the queue.
+        resourceVersion:
+          type: string
+          description: Internal version for optimistic concurrency.
+        uid:
+          type: string
+        creationTimestamp:
+          type: string
+          format: date-time
+    Status:
+      type: object
+      description: Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer

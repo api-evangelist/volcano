@@ -102,6 +102,9 @@ apis:
   - type: Documentation
     url: https://volcano.sh/en/docs/podgroup/
 common:
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/volcano-sh/volcano/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/volcano-agentic-access.yml
   - type: DomainSecurity

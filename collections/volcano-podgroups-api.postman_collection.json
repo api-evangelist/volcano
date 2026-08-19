@@ -1,0 +1,2170 @@
+{
+  "item": [
+    {
+      "id": "0d6bf8a5-53ed-4892-a0c7-83e0535b70bd",
+      "name": "PodGroups",
+      "description": {
+        "content": "Operations for managing Volcano PodGroup custom resources. PodGroups define gang scheduling units with minimum availability requirements and queue assignment.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f24877a-ddde-4ad1-ade3-3e77fc44a485",
+          "name": "Volcano List PodGroups in a namespace",
+          "request": {
+            "name": "Volcano List PodGroups in a namespace",
+            "description": {
+              "content": "Returns all Volcano PodGroup resources in the specified namespace. PodGroups are typically created automatically by the Volcano controller when a Volcano Job is submitted, but can also be created manually for pods without a Job parent.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "namespaces",
+                ":namespace",
+                "podgroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Label selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Field selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "Continuation token for paginating large result sets."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85f91ef6-54ab-4083-bf10-b0cb807ddc85",
+              "name": "List of PodGroups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"PodGroupList\",\n  \"items\": [\n    {\n      \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n      \"kind\": \"PodGroup\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"1980-04-26T11:10:37.407Z\"\n      },\n      \"spec\": {\n        \"minMember\": 1,\n        \"minResources\": {\n          \"cpu\": \"8\",\n          \"memory\": \"16Gi\"\n        },\n        \"queue\": \"default\",\n        \"priorityClassName\": \"string\",\n        \"minTaskMember\": {\n          \"key_0\": 4965,\n          \"key_1\": 2557\n        }\n      },\n      \"status\": {\n        \"phase\": \"Unknown\",\n        \"occupiedBy\": \"string\",\n        \"conditions\": [\n          {\n            \"type\": \"Scheduled\",\n            \"status\": \"True\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1994-12-10T02:47:53.350Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"type\": \"Unschedulable\",\n            \"status\": \"Unknown\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"2019-01-24T15:33:39.831Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ],\n        \"succeeded\": 1734,\n        \"failed\": 3787,\n        \"running\": 8151\n      }\n    },\n    {\n      \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n      \"kind\": \"PodGroup\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"2001-02-13T23:05:40.559Z\"\n      },\n      \"spec\": {\n        \"minMember\": 1,\n        \"minResources\": {\n          \"cpu\": \"8\",\n          \"memory\": \"16Gi\"\n        },\n        \"queue\": \"default\",\n        \"priorityClassName\": \"string\",\n        \"minTaskMember\": {\n          \"key_0\": 5669,\n          \"key_1\": 7712\n        }\n      },\n      \"status\": {\n        \"phase\": \"Running\",\n        \"occupiedBy\": \"string\",\n        \"conditions\": [\n          {\n            \"type\": \"Unschedulable\",\n            \"status\": \"False\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1995-01-06T23:29:06.638Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"type\": \"Scheduled\",\n            \"status\": \"False\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1969-12-27T00:16:42.560Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ],\n        \"succeeded\": 8862,\n        \"failed\": 5010,\n        \"running\": 8197\n      }\n    }\n  ],\n  \"metadata\": {\n    \"resourceVersion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41311f5e-35a2-4d47-b479-5afce5b81c03",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9bdc48e6-96bf-43cf-a615-25301c9eb63a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5312c4bd-8d5f-4ad3-9868-38b110fb33cd",
+          "name": "Volcano Create a PodGroup",
+          "request": {
+            "name": "Volcano Create a PodGroup",
+            "description": {
+              "content": "Creates a new PodGroup resource in the specified namespace. Pods can reference this PodGroup via the scheduling.volcano.sh/pod-group annotation to join the group and benefit from gang scheduling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "namespaces",
+                ":namespace",
+                "podgroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"resourceVersion\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"creationTimestamp\": \"<dateTime>\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"key_0\": \"<string>\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"<string>\",\n    \"minTaskMember\": {\n      \"key_0\": \"<integer>\"\n    }\n  },\n  \"status\": {\n    \"phase\": \"<string>\",\n    \"occupiedBy\": \"<string>\",\n    \"conditions\": [\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      }\n    ],\n    \"succeeded\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"running\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81aa2b3b-26e3-4d0f-afe4-d9264a1abd31",
+              "name": "PodGroup created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"PodGroup\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1975-05-13T21:50:40.960Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 2312,\n      \"key_1\": 2993\n    }\n  },\n  \"status\": {\n    \"phase\": \"Unknown\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2022-04-08T01:49:58.167Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Unschedulable\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1951-03-02T12:32:51.606Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 2513,\n    \"failed\": 4931,\n    \"running\": 8598\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f8b2452-2d99-4f7a-b53e-997a6d0e6e84",
+              "name": "Invalid PodGroup specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"reason\": \"string\",\n  \"code\": 2633\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d102289b-be65-4f46-aa72-081545ec2fe1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c76ee4b-9ce9-4358-a001-7b02b862ee55",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "257f3234-f6af-4816-84da-512dac2f5c3c",
+              "name": "PodGroup with this name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e417473e-94ac-42a9-95ec-2cadf8fb9845",
+          "name": "Volcano Get a PodGroup",
+          "request": {
+            "name": "Volcano Get a PodGroup",
+            "description": {
+              "content": "Returns the specified PodGroup resource including its current phase, pod counts, and condition information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "namespaces",
+                ":namespace",
+                "podgroups",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afbd1022-e142-45fa-b836-9c08c0d67143",
+              "name": "PodGroup details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"PodGroup\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1975-05-13T21:50:40.960Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 2312,\n      \"key_1\": 2993\n    }\n  },\n  \"status\": {\n    \"phase\": \"Unknown\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2022-04-08T01:49:58.167Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Unschedulable\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1951-03-02T12:32:51.606Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 2513,\n    \"failed\": 4931,\n    \"running\": 8598\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ddfe88c-36b7-4249-a979-895dee06282b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "631a69eb-c705-4e6a-a953-e0586c7d1923",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7177e002-85e1-4028-ad29-065290724a85",
+              "name": "PodGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "357e7026-dccf-413b-b595-3c933b68d5e1",
+          "name": "Volcano Replace a PodGroup",
+          "request": {
+            "name": "Volcano Replace a PodGroup",
+            "description": {
+              "content": "Replaces the entire PodGroup resource with the provided specification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "namespaces",
+                ":namespace",
+                "podgroups",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"namespace\": \"<string>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"resourceVersion\": \"<string>\",\n    \"uid\": \"<string>\",\n    \"creationTimestamp\": \"<dateTime>\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"key_0\": \"<string>\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"<string>\",\n    \"minTaskMember\": {\n      \"key_0\": \"<integer>\"\n    }\n  },\n  \"status\": {\n    \"phase\": \"<string>\",\n    \"occupiedBy\": \"<string>\",\n    \"conditions\": [\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"transitionID\": \"<string>\",\n        \"lastTransitionTime\": \"<dateTime>\",\n        \"reason\": \"<string>\",\n        \"message\": \"<string>\"\n      }\n    ],\n    \"succeeded\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"running\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3fa1fb5-4cd8-4f38-83da-fa2404ade8f1",
+              "name": "PodGroup updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"PodGroup\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1975-05-13T21:50:40.960Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 2312,\n      \"key_1\": 2993\n    }\n  },\n  \"status\": {\n    \"phase\": \"Unknown\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2022-04-08T01:49:58.167Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Unschedulable\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1951-03-02T12:32:51.606Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 2513,\n    \"failed\": 4931,\n    \"running\": 8598\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "673c9539-c9d5-43ed-b5a6-9d07c57d0d96",
+              "name": "Invalid specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8d30d9c-aa6e-4911-b1ec-d6e74d71b54a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "639e7b51-6ff7-4c47-aa19-882d8f156695",
+              "name": "PodGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"<string>\",\n  \"kind\": \"<string>\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"2000-04-06T04:39:11.024Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 1402,\n      \"key_1\": 1337\n    }\n  },\n  \"status\": {\n    \"phase\": \"Inqueue\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2021-01-14T15:47:20.455Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"False\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2023-07-06T02:36:58.883Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 1016,\n    \"failed\": 513,\n    \"running\": 1665\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c882091-d540-40ef-b613-b6cedaf757ef",
+          "name": "Volcano Partially update a PodGroup",
+          "request": {
+            "name": "Volcano Partially update a PodGroup",
+            "description": {
+              "content": "Applies a partial update to the specified PodGroup.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "namespaces",
+                ":namespace",
+                "podgroups",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/merge-patch+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed5fb2d5-eac5-4e5d-af69-dc2dfe45b5ee",
+              "name": "PodGroup patched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n  \"kind\": \"PodGroup\",\n  \"metadata\": {\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"resourceVersion\": \"string\",\n    \"uid\": \"string\",\n    \"creationTimestamp\": \"1975-05-13T21:50:40.960Z\"\n  },\n  \"spec\": {\n    \"minMember\": 1,\n    \"minResources\": {\n      \"cpu\": \"8\",\n      \"memory\": \"16Gi\"\n    },\n    \"queue\": \"default\",\n    \"priorityClassName\": \"string\",\n    \"minTaskMember\": {\n      \"key_0\": 2312,\n      \"key_1\": 2993\n    }\n  },\n  \"status\": {\n    \"phase\": \"Unknown\",\n    \"occupiedBy\": \"string\",\n    \"conditions\": [\n      {\n        \"type\": \"Scheduled\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"2022-04-08T01:49:58.167Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"type\": \"Unschedulable\",\n        \"status\": \"Unknown\",\n        \"transitionID\": \"string\",\n        \"lastTransitionTime\": \"1951-03-02T12:32:51.606Z\",\n        \"reason\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"succeeded\": 2513,\n    \"failed\": 4931,\n    \"running\": 8598\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e005d8f-06f0-412e-b645-24d92d8c1476",
+              "name": "Invalid patch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffe39a25-ec09-470d-93ba-9831a4106eb3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1042d47b-3a88-489f-96e9-96ac88ac34de",
+              "name": "PodGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80ae7356-dc3d-4741-a500-bb5b3ee98632",
+          "name": "Volcano Delete a PodGroup",
+          "request": {
+            "name": "Volcano Delete a PodGroup",
+            "description": {
+              "content": "Deletes the specified PodGroup resource. Pods in the group that are pending may be removed from scheduling consideration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "namespaces",
+                ":namespace",
+                "podgroups",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "namespace",
+                  "description": "(Required) The Kubernetes namespace of the resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the resource."
+                },
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c08a8cfb-942f-448a-9064-aaf9f3fc8076",
+              "name": "PodGroup deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23d6daf6-3a61-4906-b8f6-e3de8c1bd43f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24743312-904b-4352-a8e7-b8157cfd3c03",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96154d85-ab70-482b-a548-822494919432",
+              "name": "PodGroup not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "namespaces",
+                    ":namespace",
+                    "podgroups",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "namespace",
+                      "description": "(Required) The Kubernetes namespace of the resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the resource."
+                    },
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0deb26d-b1fb-4722-acc8-996b197b15b5",
+          "name": "Volcano List PodGroups across all namespaces",
+          "request": {
+            "name": "Volcano List PodGroups across all namespaces",
+            "description": {
+              "content": "Returns all PodGroup resources across all namespaces in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "apis",
+                "scheduling.volcano.sh",
+                "v1beta1",
+                "podgroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "labelSelector",
+                  "value": "<string>",
+                  "description": "Label selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldSelector",
+                  "value": "<string>",
+                  "description": "Field selector to restrict results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "Continuation token for paginating large result sets."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Address of the Kubernetes API server",
+                  "type": "any",
+                  "value": "{{kubernetes-api-server}}",
+                  "key": "kubernetes-api-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfe0e162-4c23-41be-b527-2f2c01e1ef67",
+              "name": "All PodGroups in the cluster",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"string\",\n  \"kind\": \"PodGroupList\",\n  \"items\": [\n    {\n      \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n      \"kind\": \"PodGroup\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"1980-04-26T11:10:37.407Z\"\n      },\n      \"spec\": {\n        \"minMember\": 1,\n        \"minResources\": {\n          \"cpu\": \"8\",\n          \"memory\": \"16Gi\"\n        },\n        \"queue\": \"default\",\n        \"priorityClassName\": \"string\",\n        \"minTaskMember\": {\n          \"key_0\": 4965,\n          \"key_1\": 2557\n        }\n      },\n      \"status\": {\n        \"phase\": \"Unknown\",\n        \"occupiedBy\": \"string\",\n        \"conditions\": [\n          {\n            \"type\": \"Scheduled\",\n            \"status\": \"True\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1994-12-10T02:47:53.350Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"type\": \"Unschedulable\",\n            \"status\": \"Unknown\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"2019-01-24T15:33:39.831Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ],\n        \"succeeded\": 1734,\n        \"failed\": 3787,\n        \"running\": 8151\n      }\n    },\n    {\n      \"apiVersion\": \"scheduling.volcano.sh/v1beta1\",\n      \"kind\": \"PodGroup\",\n      \"metadata\": {\n        \"name\": \"string\",\n        \"namespace\": \"string\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"resourceVersion\": \"string\",\n        \"uid\": \"string\",\n        \"creationTimestamp\": \"2001-02-13T23:05:40.559Z\"\n      },\n      \"spec\": {\n        \"minMember\": 1,\n        \"minResources\": {\n          \"cpu\": \"8\",\n          \"memory\": \"16Gi\"\n        },\n        \"queue\": \"default\",\n        \"priorityClassName\": \"string\",\n        \"minTaskMember\": {\n          \"key_0\": 5669,\n          \"key_1\": 7712\n        }\n      },\n      \"status\": {\n        \"phase\": \"Running\",\n        \"occupiedBy\": \"string\",\n        \"conditions\": [\n          {\n            \"type\": \"Unschedulable\",\n            \"status\": \"False\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1995-01-06T23:29:06.638Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"type\": \"Scheduled\",\n            \"status\": \"False\",\n            \"transitionID\": \"string\",\n            \"lastTransitionTime\": \"1969-12-27T00:16:42.560Z\",\n            \"reason\": \"string\",\n            \"message\": \"string\"\n          }\n        ],\n        \"succeeded\": 8862,\n        \"failed\": 5010,\n        \"running\": 8197\n      }\n    }\n  ],\n  \"metadata\": {\n    \"resourceVersion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8489208-bf8e-4c99-b9eb-735b665adf59",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e65da8ac-665e-4eb1-8dcc-d8b97db4c296",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apis",
+                    "scheduling.volcano.sh",
+                    "v1beta1",
+                    "podgroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "labelSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fieldSelector",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Address of the Kubernetes API server",
+                      "type": "any",
+                      "value": "{{kubernetes-api-server}}",
+                      "key": "kubernetes-api-server"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Address of the Kubernetes API server",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:6443",
+      "key": "kubernetes-api-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{kubernetes-api-server}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e5a3678e-4127-4c7e-9a34-65cc7b5cbaac",
+    "name": "Volcano Job Jobs PodGroups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Volcano Job API provides Kubernetes CRD endpoints for defining and managing batch workloads using Volcano's Job resource (vcjob). Volcano Jobs support multiple task types, lifecycle policies, gang scheduling, and integration with frameworks including TensorFlow, PyTorch, Spark, and MPI. All operations go through the Kubernetes API server.\n\nContact Support:\n Name: Volcano Community",
+      "type": "text/plain"
+    }
+  }
+}

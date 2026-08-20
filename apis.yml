@@ -21,6 +21,14 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/volcano.png
 tags:
   - Batch Processing
+  - Cloud-Native
+  - HPC
+  - Incubating
+  - Kubernetes
+  - Scheduling
+  - Machine-Learning
+tags_raw:
+  - Batch Processing
   - Cloud Native
   - HPC
   - Incubating
@@ -39,6 +47,8 @@ apis:
     with one or more task groups, lifecycle policies, and scheduling requirements.
   humanURL: https://volcano.sh/en/docs/
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI

@@ -6,6 +6,19 @@ description: >-
   lifecycle management for batch workloads such as machine learning training, big data processing, and scientific
   computing. Volcano extends Kubernetes with three CRDs: Job (vcjob), Queue, and PodGroup.
 url: https://volcano.sh
+deliveryModel:
+  model: self-hosted
+  license: Apache-2.0
+  open_source: true
+  commercial: false
+  callable_host: false
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
@@ -112,6 +125,16 @@ apis:
   - type: Documentation
     url: https://volcano.sh/en/docs/podgroup/
 common:
+  - type: IssueTracker
+    url: https://github.com/volcano-sh/volcano/issues
+  - type: Releases
+    url: https://github.com/volcano-sh/volcano/releases
+  - type: SecurityPolicy
+    url: https://github.com/volcano-sh/volcano/blob/master/SECURITY-INSIGHTS.yml
+  - type: CodeOfConduct
+    url: https://github.com/volcano-sh/volcano/blob/master/code_of_conduct.md
+  - type: ContributionGuide
+    url: https://github.com/volcano-sh/volcano/blob/master/contributing.md
   - type: License
     name: Apache-2.0
     url: https://github.com/volcano-sh/volcano/blob/master/LICENSE

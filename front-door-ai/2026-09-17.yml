@@ -1,0 +1,32 @@
+# Front Door AI Index — volcano — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: volcano
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: volcano.sh
+  final_host: volcano.sh
+  ownership: own
+  owner: volcano
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 23
+  host_score: 23
+  density: 39.18
+  words: 587
+  tiers:
+    agentic: 4
+    core: 19
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 6
+    deep learning: 5
+    machine learning: 4
+    LLMs: 3
+    inference: 3
+    agent: 2
+    AI agent: 1
+    ML: 1

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Volcano Job Jobs Queues API
-  description: The Volcano Job API provides Kubernetes CRD endpoints for defining and managing batch workloads using Volcano's Job resource (vcjob). Volcano Jobs support multiple task types, lifecycle policies, gang scheduling, and integration with frameworks including TensorFlow, PyTorch, Spark, and MPI. All operations go through the Kubernetes API server.
+  title: Volcano Queue Queues API
+  description: The Volcano Queue API provides Kubernetes CRD endpoints for managing Queue resources that collect PodGroups and apply weight-based fair-share scheduling and resource quotas. Queues are the primary mechanism for multi-tenant resource partitioning and priority-based job admission in Volcano batch scheduling.
   version: 1.10.0
   contact:
     name: Volcano Community
@@ -168,81 +168,44 @@ paths:
         '404':
           description: Queue not found
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the Queue resource.
+      schema:
+        type: string
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
   schemas:
-    Queue:
-      type: object
-      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
-      required:
-      - apiVersion
-      - kind
-      - metadata
-      - spec
-      properties:
-        apiVersion:
-          type: string
-          enum:
-          - scheduling.volcano.sh/v1beta1
-        kind:
-          type: string
-          enum:
-          - Queue
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/QueueSpec'
-        status:
-          $ref: '#/components/schemas/QueueStatus'
-    QueueList:
-      type: object
-      description: A list of Volcano Queue resources.
-      required:
-      - apiVersion
-      - kind
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          enum:
-          - QueueList
-        metadata:
-          type: object
-          properties:
-            resourceVersion:
-              type: string
-        items:
-          type: array
-          description: List of Queue resources.
-          items:
-            $ref: '#/components/schemas/Queue'
-    ObjectMeta:
-      type: object
-      description: Standard Kubernetes object metadata.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the queue, unique cluster-wide.
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-          description: Labels for organizing and selecting the queue.
-        annotations:
-          type: object
-          additionalProperties:
-            type: string
-          description: Non-identifying metadata for the queue.
-        resourceVersion:
-          type: string
-          description: Internal version for optimistic concurrency.
-        uid:
-          type: string
-        creationTimestamp:
-          type: string
-          format: date-time
     Status:
       type: object
       description: Kubernetes Status object for error responses.
@@ -376,43 +339,80 @@ components:
               lastTransitionTime:
                 type: string
                 format: date-time
-  parameters:
-    limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-    fieldSelector:
-      name: fieldSelector
-      in: query
-      required: false
-      description: Field selector to restrict results.
-      schema:
-        type: string
-    labelSelector:
-      name: labelSelector
-      in: query
-      required: false
-      description: Label selector to restrict results.
-      schema:
-        type: string
-    continueToken:
-      name: continue
-      in: query
-      required: false
-      description: Continuation token for paginating large result sets.
-      schema:
-        type: string
-    name:
-      name: name
-      in: path
-      required: true
-      description: The name of the Queue resource.
-      schema:
-        type: string
+    ObjectMeta:
+      type: object
+      description: Standard Kubernetes object metadata.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the queue, unique cluster-wide.
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+          description: Labels for organizing and selecting the queue.
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+          description: Non-identifying metadata for the queue.
+        resourceVersion:
+          type: string
+          description: Internal version for optimistic concurrency.
+        uid:
+          type: string
+        creationTimestamp:
+          type: string
+          format: date-time
+    QueueList:
+      type: object
+      description: A list of Volcano Queue resources.
+      required:
+      - apiVersion
+      - kind
+      - items
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+          enum:
+          - QueueList
+        metadata:
+          type: object
+          properties:
+            resourceVersion:
+              type: string
+        items:
+          type: array
+          description: List of Queue resources.
+          items:
+            $ref: '#/components/schemas/Queue'
+    Queue:
+      type: object
+      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+          - scheduling.volcano.sh/v1beta1
+        kind:
+          type: string
+          enum:
+          - Queue
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/QueueSpec'
+        status:
+          $ref: '#/components/schemas/QueueStatus'
 externalDocs:
-  description: Volcano Job Documentation
-  url: https://volcano.sh/en/docs/vcjob/
+  description: Volcano Queue Documentation
+  url: https://volcano.sh/en/docs/v1-10-0/queue/

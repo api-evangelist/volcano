@@ -1,9 +1,9 @@
 {
   "provider": "volcano",
   "sources": [
-    "volcano-jobs-api-openapi.yml",
-    "volcano-podgroups-api-openapi.yml",
-    "volcano-queues-api-openapi.yml"
+    "_original/volcano-job-openapi.yml",
+    "_original/volcano-podgroup-openapi.yml",
+    "_original/volcano-queue-openapi.yml"
   ],
   "outputs": [
     "volcano-jobs-api-openapi.yml",
@@ -13,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "volcano-job-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "volcano-podgroup-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "volcano-queue-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "volcano-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "volcano-podgroups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "volcano-queues-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

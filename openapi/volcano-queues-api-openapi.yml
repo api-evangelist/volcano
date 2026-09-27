@@ -168,54 +168,54 @@ paths:
         '404':
           description: Queue not found
 components:
-  parameters:
-    limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-    name:
-      name: name
-      in: path
-      required: true
-      description: The name of the Queue resource.
-      schema:
-        type: string
-    fieldSelector:
-      name: fieldSelector
-      in: query
-      required: false
-      description: Field selector to restrict results.
-      schema:
-        type: string
-    labelSelector:
-      name: labelSelector
-      in: query
-      required: false
-      description: Label selector to restrict results.
-      schema:
-        type: string
-    continueToken:
-      name: continue
-      in: query
-      required: false
-      description: Continuation token for paginating large result sets.
-      schema:
-        type: string
   schemas:
-    Status:
+    QueueList:
       type: object
-      description: Kubernetes Status object for error responses.
+      description: A list of Volcano Queue resources.
+      required:
+      - apiVersion
+      - kind
+      - items
       properties:
-        message:
+        apiVersion:
           type: string
-        reason:
+        kind:
           type: string
-        code:
-          type: integer
+          enum:
+          - QueueList
+        metadata:
+          type: object
+          properties:
+            resourceVersion:
+              type: string
+        items:
+          type: array
+          description: List of Queue resources.
+          items:
+            $ref: '#/components/schemas/Queue'
+    Queue:
+      type: object
+      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+          - scheduling.volcano.sh/v1beta1
+        kind:
+          type: string
+          enum:
+          - Queue
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/QueueSpec'
+        status:
+          $ref: '#/components/schemas/QueueStatus'
     QueueSpec:
       type: object
       description: Specification of a Volcano Queue.
@@ -339,6 +339,16 @@ components:
               lastTransitionTime:
                 type: string
                 format: date-time
+    Status:
+      type: object
+      description: Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata.
@@ -366,53 +376,43 @@ components:
         creationTimestamp:
           type: string
           format: date-time
-    QueueList:
-      type: object
-      description: A list of Volcano Queue resources.
-      required:
-      - apiVersion
-      - kind
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          enum:
-          - QueueList
-        metadata:
-          type: object
-          properties:
-            resourceVersion:
-              type: string
-        items:
-          type: array
-          description: List of Queue resources.
-          items:
-            $ref: '#/components/schemas/Queue'
-    Queue:
-      type: object
-      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
-      required:
-      - apiVersion
-      - kind
-      - metadata
-      - spec
-      properties:
-        apiVersion:
-          type: string
-          enum:
-          - scheduling.volcano.sh/v1beta1
-        kind:
-          type: string
-          enum:
-          - Queue
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/QueueSpec'
-        status:
-          $ref: '#/components/schemas/QueueStatus'
+  parameters:
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the Queue resource.
+      schema:
+        type: string
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
 externalDocs:
   description: Volcano Queue Documentation
   url: https://volcano.sh/en/docs/v1-10-0/queue/

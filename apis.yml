@@ -39,7 +39,7 @@ tags:
   - Incubating
   - Kubernetes
   - Scheduling
-  - Machine-Learning
+  - Machine Learning
 tags_raw:
   - Batch Processing
   - Cloud Native
@@ -48,6 +48,7 @@ tags_raw:
   - Kubernetes
   - Scheduling
   - Machine Learning
+  - Machine-Learning
 created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.23'

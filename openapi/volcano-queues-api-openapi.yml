@@ -168,6 +168,43 @@ paths:
         '404':
           description: Queue not found
 components:
+  parameters:
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the Queue resource.
+      schema:
+        type: string
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
   schemas:
     QueueList:
       type: object
@@ -193,79 +230,6 @@ components:
           description: List of Queue resources.
           items:
             $ref: '#/components/schemas/Queue'
-    Queue:
-      type: object
-      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
-      required:
-      - apiVersion
-      - kind
-      - metadata
-      - spec
-      properties:
-        apiVersion:
-          type: string
-          enum:
-          - scheduling.volcano.sh/v1beta1
-        kind:
-          type: string
-          enum:
-          - Queue
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/QueueSpec'
-        status:
-          $ref: '#/components/schemas/QueueStatus'
-    QueueSpec:
-      type: object
-      description: Specification of a Volcano Queue.
-      properties:
-        weight:
-          type: integer
-          description: Relative weight of this queue for fair-share scheduling. Higher weight queues receive proportionally more resources when there is resource contention. Defaults to 1.
-          minimum: 1
-          default: 1
-        capability:
-          type: object
-          description: Maximum resource allocation for this queue. Jobs submitted to this queue cannot collectively use more resources than specified here. Uses Kubernetes resource quantity format.
-          additionalProperties:
-            type: string
-          example:
-            cpu: '16'
-            memory: 32Gi
-        reclaimable:
-          type: boolean
-          description: If true, resources allocated to idle jobs in this queue can be reclaimed by other queues that need them. Enables opportunistic resource sharing.
-          default: true
-        extendClusters:
-          type: array
-          description: List of extended cluster references for multi-cluster scheduling. Allows jobs in this queue to be dispatched across cluster boundaries.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Name of the remote cluster.
-              weight:
-                type: integer
-                description: Relative scheduling weight for this remote cluster.
-              capacity:
-                type: object
-                description: Resource capacity of the remote cluster.
-                additionalProperties:
-                  type: string
-        guarantee:
-          type: object
-          description: Guaranteed minimum resource allocation for this queue. The scheduler ensures at least this amount of resources is always available to jobs in this queue regardless of other queue pressure.
-          properties:
-            resource:
-              type: object
-              additionalProperties:
-                type: string
-              description: 'Minimum guaranteed resources using Kubernetes resource quantity format, e.g. {"cpu": "4", "memory": "8Gi"}.'
-        parent:
-          type: string
-          description: Name of the parent queue for hierarchical queue structures. Enables nested queue trees for complex multi-tenant scheduling.
     QueueStatus:
       type: object
       description: Observed status of a Volcano Queue including resource usage, job counts, and operational state.
@@ -339,16 +303,56 @@ components:
               lastTransitionTime:
                 type: string
                 format: date-time
-    Status:
+    QueueSpec:
       type: object
-      description: Kubernetes Status object for error responses.
+      description: Specification of a Volcano Queue.
       properties:
-        message:
-          type: string
-        reason:
-          type: string
-        code:
+        weight:
           type: integer
+          description: Relative weight of this queue for fair-share scheduling. Higher weight queues receive proportionally more resources when there is resource contention. Defaults to 1.
+          minimum: 1
+          default: 1
+        capability:
+          type: object
+          description: Maximum resource allocation for this queue. Jobs submitted to this queue cannot collectively use more resources than specified here. Uses Kubernetes resource quantity format.
+          additionalProperties:
+            type: string
+          example:
+            cpu: '16'
+            memory: 32Gi
+        reclaimable:
+          type: boolean
+          description: If true, resources allocated to idle jobs in this queue can be reclaimed by other queues that need them. Enables opportunistic resource sharing.
+          default: true
+        extendClusters:
+          type: array
+          description: List of extended cluster references for multi-cluster scheduling. Allows jobs in this queue to be dispatched across cluster boundaries.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Name of the remote cluster.
+              weight:
+                type: integer
+                description: Relative scheduling weight for this remote cluster.
+              capacity:
+                type: object
+                description: Resource capacity of the remote cluster.
+                additionalProperties:
+                  type: string
+        guarantee:
+          type: object
+          description: Guaranteed minimum resource allocation for this queue. The scheduler ensures at least this amount of resources is always available to jobs in this queue regardless of other queue pressure.
+          properties:
+            resource:
+              type: object
+              additionalProperties:
+                type: string
+              description: 'Minimum guaranteed resources using Kubernetes resource quantity format, e.g. {"cpu": "4", "memory": "8Gi"}.'
+        parent:
+          type: string
+          description: Name of the parent queue for hierarchical queue structures. Enables nested queue trees for complex multi-tenant scheduling.
     ObjectMeta:
       type: object
       description: Standard Kubernetes object metadata.
@@ -376,43 +380,39 @@ components:
         creationTimestamp:
           type: string
           format: date-time
-  parameters:
-    continueToken:
-      name: continue
-      in: query
-      required: false
-      description: Continuation token for paginating large result sets.
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-    fieldSelector:
-      name: fieldSelector
-      in: query
-      required: false
-      description: Field selector to restrict results.
-      schema:
-        type: string
-    name:
-      name: name
-      in: path
-      required: true
-      description: The name of the Queue resource.
-      schema:
-        type: string
-    labelSelector:
-      name: labelSelector
-      in: query
-      required: false
-      description: Label selector to restrict results.
-      schema:
-        type: string
+    Status:
+      type: object
+      description: Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer
+    Queue:
+      type: object
+      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+          - scheduling.volcano.sh/v1beta1
+        kind:
+          type: string
+          enum:
+          - Queue
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/QueueSpec'
+        status:
+          $ref: '#/components/schemas/QueueStatus'
 externalDocs:
   description: Volcano Queue Documentation
   url: https://volcano.sh/en/docs/v1-10-0/queue/

@@ -203,105 +203,51 @@ paths:
         '403':
           description: Forbidden
 components:
+  parameters:
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+    namespace:
+      name: namespace
+      in: path
+      required: true
+      description: The Kubernetes namespace of the resource.
+      schema:
+        type: string
+    name:
+      name: name
+      in: path
+      required: true
+      description: The name of the resource.
+      schema:
+        type: string
+    fieldSelector:
+      name: fieldSelector
+      in: query
+      required: false
+      description: Field selector to restrict results.
+      schema:
+        type: string
+    labelSelector:
+      name: labelSelector
+      in: query
+      required: false
+      description: Label selector to restrict results.
+      schema:
+        type: string
   schemas:
-    JobList:
-      type: object
-      description: A list of Volcano Job resources.
-      required:
-      - apiVersion
-      - kind
-      - items
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-          enum:
-          - JobList
-        metadata:
-          type: object
-          properties:
-            resourceVersion:
-              type: string
-            continue:
-              type: string
-        items:
-          type: array
-          description: List of Jobs.
-          items:
-            $ref: '#/components/schemas/Job'
-    JobSpec:
-      type: object
-      description: Specification of the Volcano Job defining workload structure and scheduling.
-      properties:
-        schedulerName:
-          type: string
-          description: Name of the scheduler to use. Defaults to 'volcano'. Can be set to a different scheduler name if needed.
-          default: volcano
-        minAvailable:
-          type: integer
-          description: Minimum number of pods that must be scheduled together for gang scheduling. If fewer than this many pods can be scheduled, none are scheduled.
-          minimum: 0
-        volumes:
-          type: array
-          description: Volumes to mount into task containers.
-          items:
-            type: object
-        tasks:
-          type: array
-          description: List of task groups defining the pods in this job. Each task can have a different pod template, replica count, and policies.
-          items:
-            $ref: '#/components/schemas/TaskSpec'
-        policies:
-          type: array
-          description: Lifecycle policies applied at the job level, controlling how the job responds to events such as pod failures or completions.
-          items:
-            $ref: '#/components/schemas/LifecyclePolicy'
-        plugins:
-          type: object
-          description: Map of plugin names to their arguments. Plugins inject environment variables and init containers for frameworks like TensorFlow, MPI, and PyTorch.
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        runningDuration:
-          type: string
-          description: Maximum duration the job is allowed to run. After this duration the job will be terminated if it has not completed.
-        queue:
-          type: string
-          description: Name of the Volcano Queue to submit this job to. Determines the scheduling priority and resource quotas that apply.
-        priorityClassName:
-          type: string
-          description: Name of the PriorityClass for this job.
-        maxRetry:
-          type: integer
-          description: Maximum number of times the job will be retried on failure.
-          minimum: 0
-        ttlSecondsAfterFinished:
-          type: integer
-          description: Number of seconds after the job finishes before it is automatically deleted. If not set, the job is not automatically deleted.
-          minimum: 0
-    JobCondition:
-      type: object
-      description: A condition in the status of a Volcano Job.
-      properties:
-        status:
-          type: string
-          enum:
-          - 'True'
-          - 'False'
-          - Unknown
-        type:
-          type: string
-        transitionID:
-          type: string
-        lastTransitionTime:
-          type: string
-          format: date-time
-        reason:
-          type: string
-        message:
-          type: string
     Job:
       type: object
       description: A Volcano Job (vcjob) custom resource defining a batch workload with multiple task types, lifecycle policies, gang scheduling, and queue assignment.
@@ -325,6 +271,84 @@ components:
           $ref: '#/components/schemas/JobSpec'
         status:
           $ref: '#/components/schemas/JobStatus'
+    JobCondition:
+      type: object
+      description: A condition in the status of a Volcano Job.
+      properties:
+        status:
+          type: string
+          enum:
+          - 'True'
+          - 'False'
+          - Unknown
+        type:
+          type: string
+        transitionID:
+          type: string
+        lastTransitionTime:
+          type: string
+          format: date-time
+        reason:
+          type: string
+        message:
+          type: string
+    TaskSpec:
+      type: object
+      description: A task group within a Volcano Job, defining a set of pods with a shared pod template and task-level lifecycle policies.
+      required:
+      - name
+      - replicas
+      - template
+      properties:
+        name:
+          type: string
+          description: Unique name for this task within the job.
+        replicas:
+          type: integer
+          description: Number of pod replicas for this task.
+          minimum: 1
+        template:
+          type: object
+          description: Kubernetes pod template spec defining the containers, resources, and configuration for pods in this task.
+        policies:
+          type: array
+          description: Lifecycle policies applied at the task level, overriding job-level policies for this task's pods.
+          items:
+            $ref: '#/components/schemas/LifecyclePolicy'
+        topologyPolicy:
+          type: string
+          description: NUMA topology policy for the task's pods, controlling how CPU and memory resources are allocated relative to NUMA nodes.
+          enum:
+          - none
+          - best-effort
+          - restricted
+          - single-numa-node
+        maxRetry:
+          type: integer
+          description: Maximum retries for this task independently of the job retry limit.
+          minimum: 0
+        dependsOn:
+          type: object
+          description: Defines task dependencies controlling execution order. Tasks can be configured to start only after specified tasks complete.
+          properties:
+            name:
+              type: array
+              description: Names of tasks that must complete before this task starts.
+              items:
+                type: string
+            iteration:
+              type: string
+              description: Iteration strategy for dependency evaluation.
+    Status:
+      type: object
+      description: Standard Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer
     JobStatus:
       type: object
       description: Observed status of a Volcano Job as reported by the controller.
@@ -419,53 +443,32 @@ components:
         creationTimestamp:
           type: string
           format: date-time
-    TaskSpec:
+    JobList:
       type: object
-      description: A task group within a Volcano Job, defining a set of pods with a shared pod template and task-level lifecycle policies.
+      description: A list of Volcano Job resources.
       required:
-      - name
-      - replicas
-      - template
+      - apiVersion
+      - kind
+      - items
       properties:
-        name:
+        apiVersion:
           type: string
-          description: Unique name for this task within the job.
-        replicas:
-          type: integer
-          description: Number of pod replicas for this task.
-          minimum: 1
-        template:
-          type: object
-          description: Kubernetes pod template spec defining the containers, resources, and configuration for pods in this task.
-        policies:
-          type: array
-          description: Lifecycle policies applied at the task level, overriding job-level policies for this task's pods.
-          items:
-            $ref: '#/components/schemas/LifecyclePolicy'
-        topologyPolicy:
+        kind:
           type: string
-          description: NUMA topology policy for the task's pods, controlling how CPU and memory resources are allocated relative to NUMA nodes.
           enum:
-          - none
-          - best-effort
-          - restricted
-          - single-numa-node
-        maxRetry:
-          type: integer
-          description: Maximum retries for this task independently of the job retry limit.
-          minimum: 0
-        dependsOn:
+          - JobList
+        metadata:
           type: object
-          description: Defines task dependencies controlling execution order. Tasks can be configured to start only after specified tasks complete.
           properties:
-            name:
-              type: array
-              description: Names of tasks that must complete before this task starts.
-              items:
-                type: string
-            iteration:
+            resourceVersion:
               type: string
-              description: Iteration strategy for dependency evaluation.
+            continue:
+              type: string
+        items:
+          type: array
+          description: List of Jobs.
+          items:
+            $ref: '#/components/schemas/Job'
     LifecyclePolicy:
       type: object
       description: A lifecycle policy rule controlling how the job or task responds to events such as pod failures, completions, or external signals.
@@ -508,60 +511,57 @@ components:
         timeout:
           type: string
           description: Duration after which the policy triggers if the condition persists.
-    Status:
+    JobSpec:
       type: object
-      description: Standard Kubernetes Status object for error responses.
+      description: Specification of the Volcano Job defining workload structure and scheduling.
       properties:
-        message:
+        schedulerName:
           type: string
-        reason:
-          type: string
-        code:
+          description: Name of the scheduler to use. Defaults to 'volcano'. Can be set to a different scheduler name if needed.
+          default: volcano
+        minAvailable:
           type: integer
-  parameters:
-    namespace:
-      name: namespace
-      in: path
-      required: true
-      description: The Kubernetes namespace of the resource.
-      schema:
-        type: string
-    labelSelector:
-      name: labelSelector
-      in: query
-      required: false
-      description: Label selector to restrict results.
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-    continueToken:
-      name: continue
-      in: query
-      required: false
-      description: Continuation token for paginating large result sets.
-      schema:
-        type: string
-    fieldSelector:
-      name: fieldSelector
-      in: query
-      required: false
-      description: Field selector to restrict results.
-      schema:
-        type: string
-    name:
-      name: name
-      in: path
-      required: true
-      description: The name of the resource.
-      schema:
-        type: string
+          description: Minimum number of pods that must be scheduled together for gang scheduling. If fewer than this many pods can be scheduled, none are scheduled.
+          minimum: 0
+        volumes:
+          type: array
+          description: Volumes to mount into task containers.
+          items:
+            type: object
+        tasks:
+          type: array
+          description: List of task groups defining the pods in this job. Each task can have a different pod template, replica count, and policies.
+          items:
+            $ref: '#/components/schemas/TaskSpec'
+        policies:
+          type: array
+          description: Lifecycle policies applied at the job level, controlling how the job responds to events such as pod failures or completions.
+          items:
+            $ref: '#/components/schemas/LifecyclePolicy'
+        plugins:
+          type: object
+          description: Map of plugin names to their arguments. Plugins inject environment variables and init containers for frameworks like TensorFlow, MPI, and PyTorch.
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        runningDuration:
+          type: string
+          description: Maximum duration the job is allowed to run. After this duration the job will be terminated if it has not completed.
+        queue:
+          type: string
+          description: Name of the Volcano Queue to submit this job to. Determines the scheduling priority and resource quotas that apply.
+        priorityClassName:
+          type: string
+          description: Name of the PriorityClass for this job.
+        maxRetry:
+          type: integer
+          description: Maximum number of times the job will be retried on failure.
+          minimum: 0
+        ttlSecondsAfterFinished:
+          type: integer
+          description: Number of seconds after the job finishes before it is automatically deleted. If not set, the job is not automatically deleted.
+          minimum: 0
 externalDocs:
   description: Volcano Job Documentation
   url: https://volcano.sh/en/docs/vcjob/

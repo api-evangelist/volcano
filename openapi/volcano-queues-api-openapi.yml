@@ -169,13 +169,6 @@ paths:
           description: Queue not found
 components:
   parameters:
-    continueToken:
-      name: continue
-      in: query
-      required: false
-      description: Continuation token for paginating large result sets.
-      schema:
-        type: string
     limit:
       name: limit
       in: query
@@ -189,6 +182,13 @@ components:
       in: path
       required: true
       description: The name of the Queue resource.
+      schema:
+        type: string
+    continueToken:
+      name: continue
+      in: query
+      required: false
+      description: Continuation token for paginating large result sets.
       schema:
         type: string
     fieldSelector:
@@ -206,39 +206,79 @@ components:
       schema:
         type: string
   schemas:
-    Status:
+    QueueStatus:
       type: object
-      description: Kubernetes Status object for error responses.
+      description: Observed status of a Volcano Queue including resource usage, job counts, and operational state.
       properties:
-        message:
+        state:
           type: string
-        reason:
-          type: string
-        code:
+          description: Current operational state of the queue.
+          enum:
+          - Open
+          - Closed
+          - Draining
+          - Unknown
+        pending:
           type: integer
-    Queue:
-      type: object
-      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
-      required:
-      - apiVersion
-      - kind
-      - metadata
-      - spec
-      properties:
-        apiVersion:
-          type: string
-          enum:
-          - scheduling.volcano.sh/v1beta1
-        kind:
-          type: string
-          enum:
-          - Queue
-        metadata:
-          $ref: '#/components/schemas/ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/QueueSpec'
-        status:
-          $ref: '#/components/schemas/QueueStatus'
+          format: int32
+          description: Number of PodGroups in the Pending phase in this queue.
+        running:
+          type: integer
+          format: int32
+          description: Number of PodGroups in the Running phase in this queue.
+        unknown:
+          type: integer
+          format: int32
+          description: Number of PodGroups in the Unknown phase in this queue.
+        inqueue:
+          type: integer
+          format: int32
+          description: Number of PodGroups queued and waiting for resources.
+        guaranteed:
+          type: object
+          description: Guaranteed resource allocation for this queue.
+          additionalProperties:
+            type: string
+        allocated:
+          type: object
+          description: Currently allocated resources across all running jobs in this queue.
+          additionalProperties:
+            type: string
+        reservation:
+          type: object
+          description: Reserved resource allocation for this queue.
+          properties:
+            nodes:
+              type: object
+              additionalProperties:
+                type: string
+            resource:
+              type: object
+              additionalProperties:
+                type: string
+        conditions:
+          type: array
+          description: Current conditions of the queue.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              status:
+                type: string
+                enum:
+                - 'True'
+                - 'False'
+                - Unknown
+              reason:
+                type: string
+              message:
+                type: string
+              transitionID:
+                type: string
+              lastTransitionTime:
+                type: string
+                format: date-time
     QueueSpec:
       type: object
       description: Specification of a Volcano Queue.
@@ -316,6 +356,39 @@ components:
         creationTimestamp:
           type: string
           format: date-time
+    Status:
+      type: object
+      description: Kubernetes Status object for error responses.
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        code:
+          type: integer
+    Queue:
+      type: object
+      description: A Volcano Queue cluster-scoped custom resource defining a scheduling partition with weight-based fair sharing, resource quotas, and job admission controls.
+      required:
+      - apiVersion
+      - kind
+      - metadata
+      - spec
+      properties:
+        apiVersion:
+          type: string
+          enum:
+          - scheduling.volcano.sh/v1beta1
+        kind:
+          type: string
+          enum:
+          - Queue
+        metadata:
+          $ref: '#/components/schemas/ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/QueueSpec'
+        status:
+          $ref: '#/components/schemas/QueueStatus'
     QueueList:
       type: object
       description: A list of Volcano Queue resources.
@@ -340,79 +413,6 @@ components:
           description: List of Queue resources.
           items:
             $ref: '#/components/schemas/Queue'
-    QueueStatus:
-      type: object
-      description: Observed status of a Volcano Queue including resource usage, job counts, and operational state.
-      properties:
-        state:
-          type: string
-          description: Current operational state of the queue.
-          enum:
-          - Open
-          - Closed
-          - Draining
-          - Unknown
-        pending:
-          type: integer
-          format: int32
-          description: Number of PodGroups in the Pending phase in this queue.
-        running:
-          type: integer
-          format: int32
-          description: Number of PodGroups in the Running phase in this queue.
-        unknown:
-          type: integer
-          format: int32
-          description: Number of PodGroups in the Unknown phase in this queue.
-        inqueue:
-          type: integer
-          format: int32
-          description: Number of PodGroups queued and waiting for resources.
-        guaranteed:
-          type: object
-          description: Guaranteed resource allocation for this queue.
-          additionalProperties:
-            type: string
-        allocated:
-          type: object
-          description: Currently allocated resources across all running jobs in this queue.
-          additionalProperties:
-            type: string
-        reservation:
-          type: object
-          description: Reserved resource allocation for this queue.
-          properties:
-            nodes:
-              type: object
-              additionalProperties:
-                type: string
-            resource:
-              type: object
-              additionalProperties:
-                type: string
-        conditions:
-          type: array
-          description: Current conditions of the queue.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              status:
-                type: string
-                enum:
-                - 'True'
-                - 'False'
-                - Unknown
-              reason:
-                type: string
-              message:
-                type: string
-              transitionID:
-                type: string
-              lastTransitionTime:
-                type: string
-                format: date-time
 externalDocs:
   description: Volcano Queue Documentation
   url: https://volcano.sh/en/docs/v1-10-0/queue/

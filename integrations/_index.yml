@@ -41,3 +41,34 @@
     detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
+- slug: volcano-homebrew
+  label: Homebrew
+  partner: homebrew
+  partner_name: Homebrew
+  category: official CLI (Homebrew)
+  type: register
+  channel: package-registry
+  evidence: https://formulae.brew.sh/formula/volcano-cli
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Homebrew (public package index)
+    spec_file: null
+    packages:
+    - name: volcano-cli
+      kind: formula
+      version: 1.16.0
+      released: null
+      lapsed: false
+      page: https://formulae.brew.sh/formula/volcano-cli
+      cli: 'formula desc: CLI for Volcano, Cloud Native Batch System'
+      repo_leg: domain:volcano.sh
+      publisher_leg: artifact-github-org:volcano-sh
+      matched_by: domain
+    current: true
+    signal_note: 'the provider''s own command-line tool on a package manager: distribution, not an integration;
+      lapsed = no release in 24 months or deprecated / disabled by the manager'
+    detected_by: sweep-official-clis.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
